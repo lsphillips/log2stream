@@ -34,7 +34,7 @@ All loggers are an instance of `log2stream.Logger`. You can retrieve all loggers
 
 #### The default factory
 
-In most cases you won't need need to create your own factory. You can just use the default factory which is accessible through the `log2stream` module directly:
+In most cases you won't need need to create your own factory. You can just use the default factory which is accessible through the Log2stream module directly:
 
 ``` js
 const logger = log2stream.getLogger('logger');
@@ -169,7 +169,7 @@ factory.level = log2stream.Level.ALL;
 
 ### Manipulating log records
 
-As mentioned earlier, `log2stream` does not have the concept of appenders and layouts. You have to do that yourself using streams.
+As mentioned earlier, Log2stream does not have the concept of appenders and layouts. You have to do that yourself using streams.
 
 #### Log records
 
@@ -183,7 +183,7 @@ A log record is just an instance of `log2stream.Record`, which is just a dumb ob
 
 #### Formatting log records
 
-To format log records you will have to pipe the stream of a factory (or logger) into a transform stream. `log2stream` provides a utility to help you achieve this:
+To format log records you will have to pipe the stream of a factory (or logger) into a transform stream. Log2stream provides a utility to help you achieve this:
 
 ``` js
 let formatter = log2stream.transform(function (record)
@@ -198,7 +198,7 @@ factory.stream.pipe(formatter).pipe(process.stdout);
 
 There could be times when you want to filter log records. An example would be to pipe all log records of a severity level greater than `WARN` into the `stderr` stream.
 
-To achieve this you will have to pipe the stream of a factory (or logger) into a transform stream. `log2stream` provides a utility to help you achieve this as well:
+To achieve this you will have to pipe the stream of a factory (or logger) into a transform stream. Log2stream provides a utility to help you achieve this as well:
 
 ``` js
 let filter = log2stream.filter(function (record)
