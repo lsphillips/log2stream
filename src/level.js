@@ -5,8 +5,8 @@
  *
  * @property {Level} ALL   The lowest possible severity level, it is intended to enable a logger to create a record of all severity levels.
  * @property {Level} DEBUG Details useful for debugging an application.
- * @property {Level} INFO	 Progress of an application.
- * @property {Level} WARN	 Potentially harmful situations, a.k.a warnings.
+ * @property {Level} INFO  Progress of an application.
+ * @property {Level} WARN  Potentially harmful situations, a.k.a warnings.
  * @property {Level} ERROR Errors that wouldn't normally stop the application from running.
  * @property {Level} FATAL Severe errors that may stop the application from running.
  * @property {Level} OFF   The highest possible severity level, it is intended to disable a logger.
