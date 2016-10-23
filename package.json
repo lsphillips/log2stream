@@ -1,0 +1,56 @@
+{
+	"name" : "log2stream",
+
+	"version" : "0.1.0",
+
+	"description" : "A logging library with an interface inspired by Log4j but removes the concepts of appenders and layouts in favour of streams.",
+
+	"author" :
+	{
+		"name" : "Luke Phillips",
+		"email" : "lsphillips.mail@gmail.com"
+	},
+
+	"keywords" :
+	[
+		"logging",
+		"console",
+		"stream"
+	],
+
+	"homepage" : "https://github.com/lsphillips/Log2stream",
+
+	"bugs" :
+	{
+		"url" : "https://github.com/lsphillips/Log2stream/issues"
+	},
+
+	"devDependencies" :
+	{
+		"chai" : "3.5.0",
+		"sinon" : "1.17.5",
+		"grunt" : "1.0.1",
+		"grunt-eslint" : "19.0.0",
+		"grunt-mocha-cli" : "2.1.0"
+	},
+
+	"main" : "src/log2stream.js",
+
+	"repository" :
+	{
+		"type" : "git",
+		"url" : "https://github.com/lsphillips/Log2stream.git"
+	},
+
+	"scripts" :
+	{
+		"test" : "grunt test"
+	},
+
+	"license" : "MIT",
+
+	"engines" :
+	{
+		"node" : ">=6.0.0"
+	}
+}
