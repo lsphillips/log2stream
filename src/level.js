@@ -154,7 +154,7 @@ class Level
 	 * @returns {Level} The level represented by the provided string. If the conversion fails, the specified default will be returned instead.
 	 *
 	 * @param {String} stringToConvert       The string to convert into a severity level.
-	 * @param {Level}	 [defaultLevel = null] The severity level to return if the conversion fails.
+	 * @param {Level}  [defaultLevel = null] The severity level to return if the conversion fails.
 	 */
 	static toLevel (stringToConvert, defaultLevel = null)
 	{
@@ -173,8 +173,8 @@ class Level
 
 Level.ALL   = new Level('ALL'  , Number.MIN_VALUE);
 Level.DEBUG = new Level('DEBUG', 1);
-Level.INFO	= new Level('INFO' , 2);
-Level.WARN	= new Level('WARN' , 3); // <- minimum
+Level.INFO  = new Level('INFO' , 2);
+Level.WARN  = new Level('WARN' , 3);
 Level.ERROR = new Level('ERROR', 4);
 Level.FATAL = new Level('FATAL', 5);
 Level.OFF   = new Level('OFF'  , Number.MAX_VALUE);

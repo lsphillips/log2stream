@@ -7,7 +7,7 @@ const stream = require('stream');
 
 // --------------------------------------------------------
 
-const Level	 = require('./level');
+const Level  = require('./level');
 const Record = require('./record');
 
 // --------------------------------------------------------
@@ -23,7 +23,7 @@ class Logger
 	 * Creates a new logger.
 	 *
 	 * @param {String} name	 The name of the logger.
-	 * @param {Level}	 level The minimum severity level for the logger.
+	 * @param {Level}  level The minimum severity level for the logger.
 	 */
 	constructor (name, level)
 	{

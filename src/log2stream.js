@@ -9,7 +9,7 @@ const stream = require('stream');
 
 const Logger        = require('./logger');
 const Record        = require('./record');
-const Level	        = require('./level');
+const Level         = require('./level');
 const LoggerFactory = require('./loggerFactory');
 
 // --------------------------------------------------------

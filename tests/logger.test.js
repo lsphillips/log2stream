@@ -7,7 +7,7 @@
 
 const chai   = require('chai');
 const stream = require('stream');
-const sinon	 = require('sinon');
+const sinon  = require('sinon');
 
 // --------------------------------------------------------
 

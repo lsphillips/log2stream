@@ -219,7 +219,7 @@ npm install log2stream
 
 ## Development
 
-Grunt is used to handle the build process for Log2Stream. To perform a full build, use the `build` task:
+Grunt is used to handle the build process for Log2stream. To perform a full build, use the `build` task:
 
 ``` sh
 grunt build

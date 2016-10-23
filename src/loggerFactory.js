@@ -21,7 +21,7 @@ class LoggerFactory
 {
 	/**
 	 * Creates a logger factory.
-	 *
+	 * 
 	 * @param {Level} [level = Level.ALL] The minimum severity level that all created loggers will have.
 	 */
 	constructor (level = Level.ALL)
