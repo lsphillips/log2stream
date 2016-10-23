@@ -127,7 +127,7 @@ describe('class Logger', function ()
 		{
 			context('shall write a log record to Logger#stream', function ()
 			{
-				it(`only when the minimum severity level of the logger is greater than or equal to Level.${nameOfLevel}`, function ()
+				it(`only when Level.${nameOfLevel} is greater than or equal to the minimum severity level of the logger`, function ()
 				{
 					// Setup.
 					let logger = new Logger('Test', Level.OFF);

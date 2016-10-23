@@ -90,7 +90,7 @@ class Logger
 	 */
 	debug (message, metadata)
 	{
-		if (this.level.isLessThanOrEqualTo(Level.DEBUG))
+		if (Level.DEBUG.isGreaterThanOrEqualTo(this.level))
 		{
 			this.stream.write(
 				new Record(Level.DEBUG, this.name, message, metadata)
@@ -108,7 +108,7 @@ class Logger
 	 */
 	info (message, metadata)
 	{
-		if (this.level.isLessThanOrEqualTo(Level.INFO))
+		if (Level.INFO.isGreaterThanOrEqualTo(this.level))
 		{
 			this.stream.write(
 				new Record(Level.INFO, this.name, message, metadata)
@@ -126,7 +126,7 @@ class Logger
 	 */
 	warn (message, metadata)
 	{
-		if (this.level.isLessThanOrEqualTo(Level.WARN))
+		if (Level.WARN.isGreaterThanOrEqualTo(this.level))
 		{
 			this.stream.write(
 				new Record(Level.WARN, this.name, message, metadata)
@@ -144,7 +144,7 @@ class Logger
 	 */
 	error (message, metadata)
 	{
-		if (this.level.isLessThanOrEqualTo(Level.ERROR))
+		if (Level.ERROR.isGreaterThanOrEqualTo(this.level))
 		{
 			this.stream.write(
 				new Record(Level.ERROR, this.name, message, metadata)
@@ -162,7 +162,7 @@ class Logger
 	 */
 	fatal (message, metadata)
 	{
-		if (this.level.isLessThanOrEqualTo(Level.FATAL))
+		if (Level.FATAL.isGreaterThanOrEqualTo(this.level))
 		{
 			this.stream.write(
 				new Record(Level.FATAL, this.name, message, metadata)
