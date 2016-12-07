@@ -70,6 +70,21 @@ describe('class LoggerFactory', function ()
 			chai.expect(loggerB.level).to.equal(Level.INFO);
 			chai.expect(loggerC.level).to.equal(Level.ERROR);
 		});
+
+		// ------------------------------------------------------
+
+		it('shall throw a type error when assigned a value that is not an instance of `Level`', function ()
+		{
+			// Setup.
+			let factory = new LoggerFactory();
+
+			// Act & Assert.
+			chai.expect(function ()
+			{
+				factory.level = null;
+
+			}).to.throw(TypeError);
+		});
 	});
 
 	// -------------------------------------------------------

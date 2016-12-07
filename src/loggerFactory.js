@@ -21,7 +21,7 @@ class LoggerFactory
 {
 	/**
 	 * Creates a logger factory.
-	 * 
+	 *
 	 * @param {Level} [level = Level.ALL] The minimum severity level that all created loggers will have.
 	 */
 	constructor (level = Level.ALL)
@@ -54,6 +54,8 @@ class LoggerFactory
 		 * @type {Level}
 		 *
 		 * @memberof LoggerFactory
+		 *
+		 * @throws {TypeError} When the assigned value is not an instance of `Level`.
 		 */
 		Object.defineProperty(this, 'level',
 		{
@@ -64,6 +66,11 @@ class LoggerFactory
 
 			set (newMinimumSeverityLevel)
 			{
+				if (newMinimumSeverityLevel instanceof Level === false)
+				{
+					throw new TypeError('The provided minimum severity level is not a severity level.');
+				}
+
 				this.loggers.forEach(function (logger)
 				{
 					if (logger.level === minimumSeverityLevelForNewLoggers)
