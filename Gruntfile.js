@@ -1,3 +1,7 @@
+'use strict';
+
+// --------------------------------------------------------
+
 module.exports = function (grunt)
 {
 	// Dependencies
@@ -37,7 +41,7 @@ module.exports = function (grunt)
 	// -------------------------------------------------------
 
 	grunt.registerTask('test', ['eslint', 'mochacli']);
-	
+
 	// Task `default`
 	// -------------------------------------------------------
 
