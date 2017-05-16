@@ -31,7 +31,8 @@
 		"sinon" : "1.17.5",
 		"grunt" : "1.0.1",
 		"grunt-eslint" : "19.0.0",
-		"grunt-mocha-cli" : "2.1.0"
+		"grunt-mocha-cli" : "2.1.0",
+		"@types/node" : "7.0.18"
 	},
 
 	"main" : "src/log2stream.js",

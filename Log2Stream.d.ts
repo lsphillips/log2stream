@@ -51,7 +51,7 @@ export class Record
 export class Logger
 {
 	readonly name   : string;
-	readonly stream : null;
+	readonly stream : NodeJS.ReadableStream;
 
 	// -------------------------------------------------------
 
@@ -75,7 +75,7 @@ export class Logger
 export class LoggerFactory
 {
 	readonly loggers : Logger[];
-	readonly stream  : null;
+	readonly stream  : NodeJS.ReadableStream;
 
 	// -------------------------------------------------------
 
@@ -102,8 +102,8 @@ export interface RecordFilter
 
 // --------------------------------------------------------
 
-export function filter(test : RecordFilter) : null;
+export function filter(test : RecordFilter) : NodeJS.ReadableStream;
 
 // --------------------------------------------------------
 
-export function transform(transform : RecordTransformer) : null;
+export function transform(transform : RecordTransformer) : NodeJS.ReadableStream;
