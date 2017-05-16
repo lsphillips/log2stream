@@ -32,13 +32,13 @@ export class Level
 
 	// -------------------------------------------------------
 
-	static ALL   : Level;
-	static DEBUG : Level;
-	static INFO  : Level;
-	static WARN  : Level;
-	static ERROR : Level;
-	static FATAL : Level;
-	static OFF   : Level;
+	static readonly ALL   : Level;
+	static readonly DEBUG : Level;
+	static readonly INFO  : Level;
+	static readonly WARN  : Level;
+	static readonly ERROR : Level;
+	static readonly FATAL : Level;
+	static readonly OFF   : Level;
 }
 
 // --------------------------------------------------------
