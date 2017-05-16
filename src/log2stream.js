@@ -99,7 +99,7 @@ module.exports.filter = function (test)
  * logger.stream
  *
  *      .pipe(
- *			 log2stream.transform(function (record)
+ *           log2stream.transform(function (record)
  *           {
  *               return `${record.level} [${record.data.toISOString()}] ${record.category} - ${record.message}`;
  *           })
