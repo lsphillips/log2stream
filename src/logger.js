@@ -86,7 +86,7 @@ class Logger
 	 * Writes a log record that is useful for debugging an application.
 	 *
 	 * @param {String} message    The message to log.
-	 * @param {Object} [metadata] The metadata to associate with the log record.
+	 * @param {*}      [metadata] The metadata to associate with the log record.
 	 */
 	debug (message, metadata)
 	{
@@ -104,7 +104,7 @@ class Logger
 	 * Writes a log record that highlights the progress of an application.
 	 *
 	 * @param {String} message    The message to log.
-	 * @param {Object} [metadata] The metadata to associate with the log record.
+	 * @param {*}      [metadata] The metadata to associate with the log record.
 	 */
 	info (message, metadata)
 	{
@@ -122,7 +122,7 @@ class Logger
 	 * Writes a log record that highlights potentially harmful situations, a.k.a warnings.
 	 *
 	 * @param {String} message    The message to log.
-	 * @param {Object} [metadata] The metadata to associate with the log record.
+	 * @param {*}      [metadata] The metadata to associate with the log record.
 	 */
 	warn (message, metadata)
 	{
@@ -140,7 +140,7 @@ class Logger
 	 * Writes a record that highlights errors that wouldn't normally stop the application from running.
 	 *
 	 * @param {String} message    The message to log.
-	 * @param {Object} [metadata] The metadata to associate with the log record.
+	 * @param {*}      [metadata] The metadata to associate with the log record.
 	 */
 	error (message, metadata)
 	{
@@ -158,7 +158,7 @@ class Logger
 	 * Writes a record that highlights severe errors that may stop the application from running.
 	 *
 	 * @param {String} message    The message to log.
-	 * @param {Object} [metadata] The metadata to associate with the log record.
+	 * @param {*}      [metadata] The metadata to associate with the log record.
 	 */
 	fatal (message, metadata)
 	{

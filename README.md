@@ -42,12 +42,12 @@ All log records created by a logger are piped to the stream of the factory respo
 ``` js
 let aWritableStream = new stream.Writable(
 {
-  write (record, _, callback)
-  {
-    // ...
-  },
+    write (record, _, callback)
+    {
+        // ...
+    },
 
-  objectMode : true // important!
+    objectMode : true // important!
 });
 
 factory.stream.pipe(aWritableStream);
@@ -87,12 +87,12 @@ You can create log records that are useful for debugging an application.
 logger.debug('This is a debug message.');
 ```
 
-In addition to logging a string message, you may also provide an additional metadata object:
+In addition to logging a string message, you may also provide additional metadata:
 
 ``` js
 logger.warn('This is a warning message.',
 {
-  anything : 'something'
+    anything : 'something'
 });
 ```
 
@@ -103,12 +103,12 @@ All log records created by a logger that have a severity level higher than or eq
 ``` js
 let aWritableStream = new stream.Writable(
 {
-  write (record, _, callback)
-  {
-    // ...
-  },
+    write (record, _, callback)
+    {
+        // ...
+    },
 
-  objectMode : true // Important!
+    objectMode : true // Important!
 });
 
 logger.stream.pipe(aWritableStream);
@@ -181,7 +181,7 @@ To format log records you will have to pipe the stream of a factory (or logger) 
 ``` js
 let formatter = log2stream.transform(function (record)
 {
-  return `${record.category} - ${record.message}`;
+    return `${record.category} - ${record.message}`;
 });
 
 factory.stream.pipe(formatter).pipe(process.stdout);
@@ -196,7 +196,7 @@ To achieve this you will have to pipe the stream of a factory (or logger) into a
 ``` js
 let filter = log2stream.filter(function (record)
 {
-  return record.level.isGreaterThan(log2stream.Level.WARN);
+    return record.level.isGreaterThan(log2stream.Level.WARN);
 });
 
 factory.stream.pipe(filter).pipe(formatter).pipe(process.stderr);

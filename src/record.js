@@ -13,7 +13,7 @@ class Record
 	 * @param {Level}  level             The severity level of the record.
 	 * @param {String} category          The category of the record.
 	 * @param {String} message           The message describing the record.
-	 * @param {Object} [metadata = null] The metadata associated with the record.
+	 * @param {*}      [metadata = null] The metadata associated with the record.
 	 */
 	constructor (level, category, message, metadata = null)
 	{
@@ -86,7 +86,7 @@ class Record
 		 *
 		 * @instance
 		 *
-		 * @type {Date}
+		 * @type {*}
 		 *
 		 * @memberof Record
 		 */
