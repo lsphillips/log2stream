@@ -1,4 +1,4 @@
-// Type definitions for Log2Stream
+// Type definitions for Log2stream
 // --------------------------------------------------------
 
 export class Level

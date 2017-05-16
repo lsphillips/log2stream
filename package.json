@@ -55,5 +55,5 @@
 		"node" : ">=6.0.0"
 	},
 
-	"types" : "Log2Stream.d.ts"
+	"types" : "Log2stream.d.ts"
 }
