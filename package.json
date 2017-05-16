@@ -1,7 +1,7 @@
 {
 	"name" : "log2stream",
 
-	"version" : "1.0.0",
+	"version" : "1.0.1",
 
 	"description" : "A logging library with an interface inspired by Log4j but removes the concepts of appenders and layouts in favour of streams.",
 
