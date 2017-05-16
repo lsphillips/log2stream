@@ -1,7 +1,7 @@
 {
 	"name" : "log2stream",
 
-	"version" : "0.1.2",
+	"version" : "1.0.0",
 
 	"description" : "A logging library with an interface inspired by Log4j but removes the concepts of appenders and layouts in favour of streams.",
 
@@ -52,5 +52,7 @@
 	"engines" :
 	{
 		"node" : ">=6.0.0"
-	}
+	},
+
+	"types" : "Log2Stream.d.ts"
 }

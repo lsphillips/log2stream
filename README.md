@@ -35,16 +35,6 @@ factory.getLogger('category') === factory.getLogger('category');
 
 All loggers are an instance of `log2stream.Logger`. You can retrieve all loggers that have been created by a factory by accessing `factory.loggers`.
 
-#### The default factory
-
-In most cases you won't need need to create your own factory. You can just use the default factory which is accessible through the Log2stream module directly:
-
-``` js
-const logger = log2stream.getLogger('logger');
-```
-
-The default factory will create loggers with a minimum severity level of `ALL`.
-
 #### The factory stream
 
 All log records created by a logger are piped to the stream of the factory responsible for it.

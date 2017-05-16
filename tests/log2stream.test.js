@@ -23,14 +23,6 @@ describe('log2stream', function ()
 
 	// -------------------------------------------------------
 
-	it('is a `LoggerFactory` instance', function ()
-	{
-		// Assert.
-		chai.expect(log2stream).to.be.instanceOf(LoggerFactory);
-	});
-
-	// -------------------------------------------------------
-
 	describe('.Level', function ()
 	{
 		it('exposes the `Level` type', function ()
@@ -124,7 +116,7 @@ describe('log2stream', function ()
 
 	// -------------------------------------------------------
 
-	describe('.transform(transformer)', function ()
+	describe('.transform(transform)', function ()
 	{
 		context('shall return a stream', function ()
 		{
@@ -141,7 +133,7 @@ describe('log2stream', function ()
 
 			// -----------------------------------------------------
 
-			it('that shall transform all log records written to it using the `transformer` function', function (done)
+			it('that shall transform all log records written to it using the `transform` function', function (done)
 			{
 				// Setup.
 				let transformer = log2stream.transform(function (record)

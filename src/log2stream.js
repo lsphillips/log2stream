@@ -15,25 +15,18 @@ const LoggerFactory = require('./loggerFactory');
 // --------------------------------------------------------
 
 /**
- * A simple logging interface that lets you decide what log records go where.
- *
- * @type {LoggerFactory}
- *
- * @module log2stream
- */
-module.exports = new LoggerFactory(Level.ALL);
-
-// --------------------------------------------------------
-
-/**
  * Tests a log record; determining whether it shall be filtered or not.
  *
- * @callback filter.test
+ * @callback RecordTest
  *
  * @returns {Boolean} `false` if the log record is to be filtered, otherwise `true`.
  *
  * @param {log2stream.Record} The log record to be tested.
+ *
+ * @memberof log2stream
  */
+
+// --------------------------------------------------------
 
 /**
  * Returns a transform stream that will filter the log records given as its input using the provided `test` function.
@@ -41,13 +34,13 @@ module.exports = new LoggerFactory(Level.ALL);
  * Example usage:
  *
  * ```
- * log2stream.stream.pipe(
- *		log2stream.filter(function (record)
- *		{
- *			 return record.level.isGreaterThanOrEqualTo(
- *          log2stream.stringToLevel('ERROR')
- *       );
- *		})
+ * logger.stream.pipe(
+ *      log2stream.filter(function (record)
+ *      {
+ *          return record.level.isGreaterThanOrEqualTo(
+ *              log2stream.stringToLevel('ERROR')
+ *          );
+ *      })
  * );
  * ```
  *
@@ -55,7 +48,9 @@ module.exports = new LoggerFactory(Level.ALL);
  *
  * @returns {stream.Transform}
  *
- * @param {filter.test} test
+ * @param {log2stream.RecordTest} test
+ *
+ * @memberof log2stream
  */
 module.exports.filter = function (test)
 {
@@ -82,14 +77,18 @@ module.exports.filter = function (test)
 // --------------------------------------------------------
 
 /**
- * Transforms a given log record.
+ * Transforms a given log record into something else.
  *
- * @callback transform.transformer
+ * @callback RecordTransformer
  *
  * @returns {*} The transformed log record.
  *
  * @param {log2stream.Record} The log record to transform.
+ *
+ * @memberof log2stream
  */
+
+// --------------------------------------------------------
 
 /**
  * Returns a transform stream that will transform the log records given as its input using the provided `transform` function.
@@ -97,20 +96,24 @@ module.exports.filter = function (test)
  * Example usage:
  *
  * ```
- * log2stream.stream
+ * logger.stream
  *
- *		.pipe(
+ *      .pipe(
  *			 log2stream.transform(function (record)
- *			 {
- *					return `${record.level} [${record.data.toISOString()}] ${record.category} - ${record.message}`;
- *			 })
- *		)
- *		.pipe(process.stdout);
+ *           {
+ *               return `${record.level} [${record.data.toISOString()}] ${record.category} - ${record.message}`;
+ *           })
+ *      )
+ *      .pipe(process.stdout);
  * ```
+ *
+ * Note: When the transformed log record is not a string; any stream you pipe the results into must have `objectMode` enabled.
  *
  * @return {stream.Transform}
  *
- * @param {transform.transformer} transformer
+ * @param {log2stream.RecordTransformer} transform
+ *
+ * @memberof log2stream
  */
 module.exports.transform = function (transform)
 {
