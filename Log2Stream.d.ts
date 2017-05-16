@@ -29,6 +29,16 @@ export class Level
 	// -------------------------------------------------------
 
 	static toLevel(stringToConvert : string, defaultLevel? : Level) : Level | null;
+
+	// -------------------------------------------------------
+
+	static ALL   : Level;
+	static DEBUG : Level;
+	static INFO  : Level;
+	static WARN  : Level;
+	static ERROR : Level;
+	static FATAL : Level;
+	static OFF   : Level;
 }
 
 // --------------------------------------------------------
