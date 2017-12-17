@@ -1,5 +1,3 @@
-/* eslint-env mocha */
-
 'use strict';
 
 // Dependencies
@@ -212,9 +210,7 @@ describe('class Logger', function ()
 				it('with the associated metadata of said record set to `metadata`', function (done)
 				{
 					// Setup.
-					let metadata =
-					{
-					};
+					let metadata = {};
 
 					// Setup.
 					let logger = new Logger('Test', Level.ALL);

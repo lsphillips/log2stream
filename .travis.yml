@@ -4,6 +4,9 @@
 language: node_js
 node_js:
     - "6"
+    - "7"
+    - "8"
+    - "9"
 
 # Deployment
 # -------------------------------------
@@ -12,7 +15,7 @@ deploy:
     provider: npm
     on:
         tags: true
-        node: "6"
+        node: "9"
     api_key:
         secure: "DZVpWIk5issCnAKGGU/ntCb3QR/p1JheMxJS630Lujvf/bBs3D2n1Yo81EjGtZzKMyDMUpd9peIpUl+edQuVBxYPiaNxLHqaBVnWigH8vMOw7hGfnp8WcJy4HXB+Dqn7wYDE49MolsIPg99oCeWQO/Hb1ByoNmX+4pOYRK3jrTEItqRqvqhJLD7EZrh92/zx9bK9uOs7Cbxqapp6NcaC2COs6d8M93QWNnCWjdtnJkGlRFeDhqi/vx8n3JXSJGCL5i8NxafYZRMZzw4iDyclhTBw7TlejWKqD8BMT+VuJBPH5BLrx8/r63LXNmkvMo6f8SDLYvBqmkdTySGkSooS65eEGq6/r0vleKcVv32VScZandf5E1G4F7P97MFO0SURIKlvpGJ7nrLCXEdJOpDXHcO42dZT8xqgSBFY6zsv9z5if/KovHXf+0qVsRRUcZgyqJWX2GUMcQYB0vtU8tTd/kJePBAArUf5aUTmjKlnUeUXXVnBjhf0AmMZqBpqCSq2MLKATLT7ILR+f3nrR/ppxNCCXtKOpT3YKy8bUekTasyqOghe2/LjieSr4YDRDd7kOlQJQ9PwCByWrJxJjEMAVOqqjE0NuLAVr0ASzgNEDbalfdK69yJ0bUjR+83Eg4n6sTE0T2Iyi6ZspDZ37U0/kM73rcTZ7r/hBrbIAxKFDdo="
     email: "lsphillips.mail@gmail.com"

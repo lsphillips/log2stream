@@ -212,10 +212,10 @@ npm install log2stream
 
 ## Development
 
-This project doesn't have much of a build process. It does have tests though; which you can run with Grunt like so:
+This project doesn't have much of a build process. It does have tests though; which you can run like so:
 
 ``` sh
-grunt test
+npm test
 ```
 
 This also runs code quality checks using ESLint. Please refer to the `.eslintrc` file to familiar yourself with the rules.
