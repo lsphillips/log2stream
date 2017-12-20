@@ -32,12 +32,9 @@ class Level
 		 *
 		 * @memberof Level
 		 */
-		Object.defineProperty(this, 'name',
-		{
+		Object.defineProperty(this, 'name', {
 			enumerable : true, configurable : false, writable : false, value : name
 		});
-
-		// ------------------------------------------------------
 
 		/**
 		 * The severity of this level.
@@ -48,13 +45,10 @@ class Level
 		 *
 		 * @memberof Level
 		 */
-		Object.defineProperty(this, 'severity',
-		{
+		Object.defineProperty(this, 'severity', {
 			enumerable : true, configurable : false, writable : false, value : severity
 		});
 	}
-
-	// -------------------------------------------------------
 
 	/**
 	 * Determines whether this level is of equal severity to another level.
@@ -68,8 +62,6 @@ class Level
 		return this.severity === level.severity;
 	}
 
-	// -------------------------------------------------------
-
 	/**
 	 * Determines whether this level is less severe than another level.
 	 *
@@ -81,8 +73,6 @@ class Level
 	{
 		return this.severity < level.severity;
 	}
-
-	// -------------------------------------------------------
 
 	/**
 	 * Determines whether this level is less severe than or equally as severe to another level.
@@ -96,8 +86,6 @@ class Level
 		return this.severity <= level.severity;
 	}
 
-	// -------------------------------------------------------
-
 	/**
 	 * Determines whether this level is more severe than another level.
 	 *
@@ -109,8 +97,6 @@ class Level
 	{
 		return this.severity > level.severity;
 	}
-
-	// -------------------------------------------------------
 
 	/**
 	 * Determines whether this level is more severe than or equally as severe to another level.
@@ -124,27 +110,15 @@ class Level
 		return this.severity >= level.severity;
 	}
 
-	// -------------------------------------------------------
-
-	/**
-	 * @ignore
-	 */
 	toString ()
 	{
 		return this.name;
 	}
 
-	// -------------------------------------------------------
-
-	/**
-	 * @ignore
-	 */
 	toJSON ()
 	{
 		return this.name;
 	}
-
-	// -------------------------------------------------------
 
 	/**
 	 * Converts a string to a severity level.
@@ -171,13 +145,13 @@ class Level
 
 // --------------------------------------------------------
 
-Level.ALL   = new Level('ALL'  , Number.MIN_VALUE);
-Level.DEBUG = new Level('DEBUG', 1);
-Level.INFO  = new Level('INFO' , 2);
-Level.WARN  = new Level('WARN' , 3);
-Level.ERROR = new Level('ERROR', 4);
-Level.FATAL = new Level('FATAL', 5);
-Level.OFF   = new Level('OFF'  , Number.MAX_VALUE);
+Level.ALL   = new Level('ALL',   Number.MIN_VALUE);
+Level.DEBUG = new Level('DEBUG', 100);
+Level.INFO  = new Level('INFO',  200);
+Level.WARN  = new Level('WARN',  300);
+Level.ERROR = new Level('ERROR', 400);
+Level.FATAL = new Level('FATAL', 500);
+Level.OFF   = new Level('OFF',   Number.MAX_VALUE);
 
 // --------------------------------------------------------
 
