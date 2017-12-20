@@ -1,16 +1,19 @@
 {
-    "extends" : "../.eslintrc",
+    "extends" :
+    [
+        "protect-me-from-my-stupidity",
+        "protect-me-from-my-stupidity/but-let-me-write-stupid-tests"
+    ],
 
     "env" :
     {
+        "node"  : true,
+        "es6"   : true,
         "mocha" : true
     },
-
-    "rules" :
+    
+    "parserOptions" :
     {
-        "no-unused-expressions" : "off",
-        "no-invalid-this"       : "off",
-        "func-names"            : "off",
-        "max-nested-callbacks"  : "off"
+        "sourceType" : "script"
     }
 }
