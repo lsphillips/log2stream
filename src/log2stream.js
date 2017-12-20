@@ -7,29 +7,27 @@ const stream = require('stream');
 
 // --------------------------------------------------------
 
-const Logger        = require('./logger');
-const Record        = require('./record');
-const Level         = require('./level');
-const LoggerFactory = require('./loggerFactory');
+module.exports.Logger        = require('./logger');
+module.exports.Record        = require('./record');
+module.exports.Level         = require('./level');
+module.exports.LoggerFactory = require('./loggerFactory');
 
 // --------------------------------------------------------
 
 /**
- * Tests a log record; determining whether it shall be filtered or not.
+ * A function that will test a provided log record.
  *
- * @callback RecordTest
+ * @callback RecordTester
  *
- * @returns {Boolean} `false` if the log record is to be filtered, otherwise `true`.
+ * @returns {Boolean} `false` if the log record does not pass the test, otherwise `true`.
  *
  * @param {log2stream.Record} The log record to be tested.
  *
  * @memberof log2stream
  */
 
-// --------------------------------------------------------
-
 /**
- * Returns a transform stream that will filter the log records given as its input using the provided `test` function.
+ * Creates a transform stream that will output the input log records filtered using a provided test.
  *
  * Example usage:
  *
@@ -37,25 +35,23 @@ const LoggerFactory = require('./loggerFactory');
  * logger.stream.pipe(
  *      log2stream.filter(function (record)
  *      {
- *          return record.level.isGreaterThanOrEqualTo(
- *              log2stream.stringToLevel('ERROR')
- *          );
+ *          return record.level.isGreaterThanOrEqualTo(log2stream.Level.ERROR);
  *      })
  * );
  * ```
  *
- * Any stream you pipe the results into must have `objectMode` enabled.
+ * **Note:** Any stream you pipe the resulting stream into must have `objectMode` enabled.
  *
- * @returns {stream.Transform}
+ * @returns {stream.Transform} A transform stream that will output filtered log records.
  *
- * @param {log2stream.RecordTest} test
+ * @param {log2stream.RecordTester} test A test to determine whether a log record should be filtered or not.
  *
  * @memberof log2stream
  */
-module.exports.filter = function (test)
+module.exports.filter = function filter (test)
 {
-	return new stream.Transform(
-	{
+	return new stream.Transform({
+
 		transform (record, _, callback)
 		{
 			let passed = test(record);
@@ -63,35 +59,31 @@ module.exports.filter = function (test)
 			if (passed)
 			{
 				callback(null, record);
+
+				return;
 			}
-			else
-			{
-				callback();
-			}
+
+			callback();
 		},
 
 		objectMode : true
 	});
 };
 
-// --------------------------------------------------------
-
 /**
- * Transforms a given log record into something else.
+ * A function that will transform a provided log record into something else.
  *
  * @callback RecordTransformer
  *
  * @returns {*} The transformed log record.
  *
- * @param {log2stream.Record} The log record to transform.
+ * @param {log2stream.Record} The log record to be transformed.
  *
  * @memberof log2stream
  */
 
-// --------------------------------------------------------
-
 /**
- * Returns a transform stream that will transform the log records given as its input using the provided `transform` function.
+ * Creates a transform stream that will output the input log records, each transformed by a provided transformer.
  *
  * Example usage:
  *
@@ -107,29 +99,31 @@ module.exports.filter = function (test)
  *      .pipe(process.stdout);
  * ```
  *
- * Note: When the transformed log record is not a string; any stream you pipe the results into must have `objectMode` enabled.
+ * **Note:** When the transformed log record is not a string; any stream you pipe the resulting stream into must have `objectMode` enabled.
  *
- * @return {stream.Transform}
+ * @returns {stream.Transform} A transform stream that will output transformed log records.
  *
- * @param {log2stream.RecordTransformer} transform
+ * @param {log2stream.RecordTransformer} transformer A transformer that will transform a log record into something else.
  *
  * @memberof log2stream
  */
-module.exports.transform = function (transform)
+module.exports.transform = function transform (transformer)
 {
-	return new stream.Transform(
-	{
+	return new stream.Transform({
+
 		transform (record, _, callback)
 		{
 			let result;
 
 			try // to transform log record.
 			{
-				result = transform(record);
+				result = transformer(record);
 			}
 			catch (error)
 			{
 				callback(error);
+
+				return;
 			}
 
 			callback(null, result);
@@ -138,31 +132,3 @@ module.exports.transform = function (transform)
 		objectMode : true
 	});
 };
-
-// --------------------------------------------------------
-
-/**
- * @ignore
- */
-module.exports.Level = Level;
-
-// --------------------------------------------------------
-
-/**
- * @ignore
- */
-module.exports.Record = Record;
-
-// --------------------------------------------------------
-
-/**
- * @ignore
- */
-module.exports.Logger = Logger;
-
-// --------------------------------------------------------
-
-/**
- * @ignore
- */
-module.exports.LoggerFactory = LoggerFactory;

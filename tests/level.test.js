@@ -5,7 +5,7 @@
 
 const { expect } = require('chai');
 
-// Subject
+// Subjects
 // --------------------------------------------------------
 
 const Level = require('../src/level');
