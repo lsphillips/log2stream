@@ -3,23 +3,21 @@
 // Dependencies
 // --------------------------------------------------------
 
-const chai   = require('chai');
-const stream = require('stream');
+const stream     = require('stream');
+const { expect } = require('chai');
 
+// Subjects
 // --------------------------------------------------------
 
-const Level  = require('../src/level');
-const Logger = require('../src/logger');
-const Record = require('../src/record');
+const Level         = require('../src/level');
+const Logger        = require('../src/logger');
+const Record        = require('../src/record');
+const LoggerFactory = require('../src/loggerFactory');
 
 // --------------------------------------------------------
 
 describe('class LoggerFactory', function ()
 {
-	const LoggerFactory = require('../src/loggerFactory');
-
-	// -------------------------------------------------------
-
 	describe('constructor(level)', function ()
 	{
 		it('shall set LoggerFactory#level to `level`', function ()
@@ -28,10 +26,8 @@ describe('class LoggerFactory', function ()
 			let factory = new LoggerFactory(Level.ERROR);
 
 			// Assert.
-			chai.expect(factory.level).to.equal(Level.ERROR);
+			expect(factory.level).to.equal(Level.ERROR);
 		});
-
-		// ------------------------------------------------------
 
 		it('shall set LoggerFactory#level to Level.ALL when `level` is not provided', function ()
 		{
@@ -39,53 +35,25 @@ describe('class LoggerFactory', function ()
 			let factory = new LoggerFactory();
 
 			// Assert.
-			chai.expect(factory.level).to.equal(Level.ALL);
+			expect(factory.level).to.equal(Level.ALL);
 		});
 	});
 
-	// -------------------------------------------------------
-
 	describe('#level', function ()
 	{
-		it('shall update all existing loggers that have not had their minimum severity level explicitly changed', function ()
-		{
-			// Setup.
-			let factory = new LoggerFactory(Level.WARN);
-
-			// Setup.
-			let loggerA = factory.getLogger('loggerA'),
-					loggerB = factory.getLogger('loggerB'),
-					loggerC = factory.getLogger('loggerC');
-
-			// Setup.
-			loggerB.level = Level.INFO;
-
-			// Act.
-			factory.level = Level.ERROR;
-
-			// Assert.
-			chai.expect(loggerA.level).to.equal(Level.ERROR);
-			chai.expect(loggerB.level).to.equal(Level.INFO);
-			chai.expect(loggerC.level).to.equal(Level.ERROR);
-		});
-
-		// ------------------------------------------------------
-
-		it('shall throw a type error when assigned a value that is not an instance of `Level`', function ()
+		it('shall not be overwritable', function ()
 		{
 			// Setup.
 			let factory = new LoggerFactory();
 
 			// Act & Assert.
-			chai.expect(function ()
+			expect(function ()
 			{
-				factory.level = null;
+				factory.level = Level.FATAL;
 
 			}).to.throw(TypeError);
 		});
 	});
-
-	// -------------------------------------------------------
 
 	describe('#loggers', function ()
 	{
@@ -95,25 +63,21 @@ describe('class LoggerFactory', function ()
 			let factory = new LoggerFactory();
 
 			// Act & Assert.
-			chai.expect(function ()
+			expect(function ()
 			{
 				factory.loggers = [];
 
 			}).to.throw(TypeError);
 		});
 
-		// ------------------------------------------------------
-
-		it('shall be empty when a new factory', function ()
+		it('shall be empty when a new factory is created', function ()
 		{
 			// Setup.
 			let factory = new LoggerFactory();
 
 			// Assert.
-			chai.expect(factory.loggers).to.have.length(0);
+			expect(factory.loggers).to.have.length(0);
 		});
-
-		// ------------------------------------------------------
 
 		it('shall be a collection of all loggers that have been created', function ()
 		{
@@ -122,18 +86,17 @@ describe('class LoggerFactory', function ()
 
 			// Setup.
 			let loggerA = factory.getLogger('loggerA'),
-					loggerB = factory.getLogger('loggerB'),
-					loggerC = factory.getLogger('loggerC');
+			    loggerB = factory.getLogger('loggerB'),
+			    loggerC = factory.getLogger('loggerC');
 
 			// Assert.
-			chai.expect(factory.loggers).to.have.length(3).and.to.include.members(
-			[
-				loggerA, loggerB, loggerC
+			expect(factory.loggers).to.have.length(3).and.to.include.members([
+				loggerA,
+				loggerB,
+				loggerC
 			]);
 		});
 	});
-
-	// -------------------------------------------------------
 
 	describe('#stream', function ()
 	{
@@ -143,10 +106,8 @@ describe('class LoggerFactory', function ()
 			let factory = new LoggerFactory();
 
 			// Act & Assert.
-			chai.expect(factory.stream).to.be.instanceof(stream.Duplex);
+			expect(factory.stream).to.be.instanceof(stream.Duplex);
 		});
-
-		// ------------------------------------------------------
 
 		it('shall allow for an infinite number of listeners', function ()
 		{
@@ -154,12 +115,10 @@ describe('class LoggerFactory', function ()
 			let factory = new LoggerFactory();
 
 			// Act & Assert.
-			chai.expect(
+			expect(
 				factory.stream.getMaxListeners()
 			).to.equal(Infinity);
 		});
-
-		// ------------------------------------------------------
 
 		it('shall be initially paused', function ()
 		{
@@ -167,12 +126,10 @@ describe('class LoggerFactory', function ()
 			let factory = new LoggerFactory();
 
 			// Act & Assert.
-			chai.expect(
+			expect(
 				factory.stream.isPaused()
 			).to.be.true;
 		});
-
-		// ------------------------------------------------------
 
 		it('shall not be overwritable', function ()
 		{
@@ -180,7 +137,7 @@ describe('class LoggerFactory', function ()
 			let factory = new LoggerFactory();
 
 			// Act & Assert.
-			chai.expect(function ()
+			expect(function ()
 			{
 				factory.stream = new stream.PassThrough();
 
@@ -188,7 +145,85 @@ describe('class LoggerFactory', function ()
 		});
 	});
 
-	// -------------------------------------------------------
+	describe('#setLoggerLevel(level, force)', function ()
+	{
+		it('shall set LoggerFactory#level to `level`', function ()
+		{
+			// Setup.
+			let factory = new LoggerFactory();
+
+			// Act.
+			factory.setLoggerLevel(Level.WARN);
+
+			// Assert.
+			expect(factory.level).to.equal(Level.WARN);
+		});
+
+		it('shall throw a type error when `level` is not an instance of `Level`', function ()
+		{
+			// Setup.
+			let factory = new LoggerFactory();
+
+			// Act & Assert.
+			expect(function ()
+			{
+				factory.setLoggerLevel(null);
+
+			}).to.throw(TypeError);
+		});
+
+		it('shall update all existing loggers that have not had their minimum severity level manually changed when `force` is `false` or ommitted', function ()
+		{
+			// Setup.
+			let factory = new LoggerFactory();
+
+			// Setup.
+			let loggerA = factory.getLogger('loggerA'),
+			    loggerB = factory.getLogger('loggerB'),
+			    loggerC = factory.getLogger('loggerC');
+
+			// Setup.
+			loggerB.level = Level.INFO;
+
+			// Act.
+			factory.setLoggerLevel(Level.ERROR);
+
+			// Assert.
+			expect(loggerA.level).to.equal(Level.ERROR);
+			expect(loggerB.level).to.equal(Level.INFO);
+			expect(loggerC.level).to.equal(Level.ERROR);
+
+			// Act.
+			factory.setLoggerLevel(Level.WARN, false);
+
+			// Assert.
+			expect(loggerA.level).to.equal(Level.WARN);
+			expect(loggerB.level).to.equal(Level.INFO);
+			expect(loggerC.level).to.equal(Level.WARN);
+		});
+
+		it('shall update all existing loggers when `force` is `true`', function ()
+		{
+			// Setup.
+			let factory = new LoggerFactory();
+
+			// Setup.
+			let loggerA = factory.getLogger('loggerA'),
+			    loggerB = factory.getLogger('loggerB'),
+			    loggerC = factory.getLogger('loggerC');
+
+			// Setup.
+			loggerB.level = Level.INFO;
+
+			// Act.
+			factory.setLoggerLevel(Level.ERROR, true);
+
+			// Assert.
+			expect(loggerA.level).to.equal(Level.ERROR);
+			expect(loggerB.level).to.equal(Level.ERROR);
+			expect(loggerC.level).to.equal(Level.ERROR);
+		});
+	});
 
 	describe('#getLogger(name)', function ()
 	{
@@ -198,15 +233,12 @@ describe('class LoggerFactory', function ()
 			let factory = new LoggerFactory(Level.WARN);
 
 			// Act & Assert.
-			chai.expect(
+			expect(
 				factory.getLogger('Test')
-			).to.be.instanceof(Logger).and.to.include(
-			{
+			).to.be.instanceof(Logger).and.to.include({
 				level : Level.WARN, name : 'Test'
 			});
 		});
-
-		// ------------------------------------------------------
 
 		it('shall pipe all log records logged by the created logger into LoggerFactory#stream', function (done)
 		{
@@ -219,7 +251,7 @@ describe('class LoggerFactory', function ()
 			// Setup.
 			factory.stream.on('data', function (record)
 			{
-				chai.expect(record).to.be.instanceof(Record);
+				expect(record).to.be.instanceof(Record);
 
 				done();
 
@@ -228,8 +260,6 @@ describe('class LoggerFactory', function ()
 			// Act.
 			logger.info('This is an information message.');
 		});
-
-		// ------------------------------------------------------
 
 		it('shall return an existing logger if one already exists with the provided `name`', function ()
 		{
@@ -240,7 +270,7 @@ describe('class LoggerFactory', function ()
 			let logger = factory.getLogger('Test');
 
 			// Act & Assert.
-			chai.expect(
+			expect(
 				factory.getLogger('Test')
 			).to.equal(logger);
 		});
