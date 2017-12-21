@@ -39,22 +39,6 @@ describe('class LoggerFactory', function ()
 		});
 	});
 
-	describe('#level', function ()
-	{
-		it('shall not be overwritable', function ()
-		{
-			// Setup.
-			let factory = new LoggerFactory();
-
-			// Act & Assert.
-			expect(function ()
-			{
-				factory.level = Level.FATAL;
-
-			}).to.throw(TypeError);
-		});
-	});
-
 	describe('#loggers', function ()
 	{
 		it('shall not be overwritable', function ()

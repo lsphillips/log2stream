@@ -41,7 +41,7 @@ class LoggerFactory
 
 		/**
 		 * The minimum severity level that all created loggers will have.
-		 *
+		 * 
 		 * When set, all created loggers will be updated if a logger hasn't already had its minimum severity level configured.
 		 *
 		 * @instance
@@ -49,11 +49,9 @@ class LoggerFactory
 		 * @type {Level}
 		 *
 		 * @memberof LoggerFactory
-		 *
-		 * @throws {TypeError} When the assigned value is not an instance of `Level`.
 		 */
 		Object.defineProperty(this, 'level', {
-			enumerable : true, value : level
+			enumerable : true, writable : true, value : level
 		});
 
 		/**
@@ -118,7 +116,7 @@ class LoggerFactory
 	{
 		let logger = this.loggers.find(l => l.name === name);
 
-		if (logger)
+		if (!logger)
 		{
 			logger = new Logger(name, this.level);
 
