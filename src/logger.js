@@ -36,12 +36,9 @@ class Logger
 		 *
 		 * @memberof Logger
 		 */
-		Object.defineProperty(this, 'name',
-		{
+		Object.defineProperty(this, 'name', {
 			enumerable : true, configurable : false, writable : false, value : name
 		});
-
-		// ------------------------------------------------------
 
 		/**
 		 * The minimum severity level of this logger.
@@ -52,12 +49,9 @@ class Logger
 		 *
 		 * @memberof Logger
 		 */
-		Object.defineProperty(this, 'level',
-		{
+		Object.defineProperty(this, 'level', {
 			enumerable : true, configurable : false, writable : true, value : level
 		});
-
-		// ------------------------------------------------------
 
 		/**
 		 * The stream that log records created by this logger will be written too.
@@ -68,19 +62,15 @@ class Logger
 		 *
 		 * @memberof Logger
 		 */
-		Object.defineProperty(this, 'stream',
-		{
-			value : new stream.PassThrough(
-			{
-				objectMode : true
+		Object.defineProperty(this, 'stream', {
 
+			value : new stream.PassThrough({
+				objectMode : true
 			}).setMaxListeners(Infinity).pause(),
 
 			enumerable : false, configurable : false, writable : false
 		});
 	}
-
-	// -------------------------------------------------------
 
 	/**
 	 * Writes a log record that is useful for debugging an application.
@@ -98,8 +88,6 @@ class Logger
 		}
 	}
 
-	// -------------------------------------------------------
-
 	/**
 	 * Writes a log record that highlights the progress of an application.
 	 *
@@ -115,8 +103,6 @@ class Logger
 			);
 		}
 	}
-
-	// -------------------------------------------------------
 
 	/**
 	 * Writes a log record that highlights potentially harmful situations, a.k.a warnings.
@@ -134,8 +120,6 @@ class Logger
 		}
 	}
 
-	// -------------------------------------------------------
-
 	/**
 	 * Writes a record that highlights errors that wouldn't normally stop the application from running.
 	 *
@@ -151,8 +135,6 @@ class Logger
 			);
 		}
 	}
-
-	// -------------------------------------------------------
 
 	/**
 	 * Writes a record that highlights severe errors that may stop the application from running.
