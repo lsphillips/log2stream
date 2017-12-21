@@ -37,7 +37,7 @@ class Logger
 		 * @memberof Logger
 		 */
 		Object.defineProperty(this, 'name', {
-			enumerable : true, configurable : false, writable : false, value : name
+			enumerable : true, value : name
 		});
 
 		/**
@@ -50,7 +50,7 @@ class Logger
 		 * @memberof Logger
 		 */
 		Object.defineProperty(this, 'level', {
-			enumerable : true, configurable : false, writable : true, value : level
+			enumerable : true, writable : true, value : level
 		});
 
 		/**
@@ -66,9 +66,7 @@ class Logger
 
 			value : new stream.PassThrough({
 				objectMode : true
-			}).setMaxListeners(Infinity).pause(),
-
-			enumerable : false, configurable : false, writable : false
+			}).setMaxListeners(Infinity).pause()
 		});
 	}
 

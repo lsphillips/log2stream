@@ -28,7 +28,7 @@ class Record
 		 */
 		Object.defineProperty(this, 'level',
 		{
-			enumerable : true, configurable : false, writable : false, value : level
+			enumerable : true, value : level
 		});
 
 		// ------------------------------------------------------
@@ -44,7 +44,7 @@ class Record
 		 */
 		Object.defineProperty(this, 'category',
 		{
-			enumerable : true, configurable : false, writable : false, value : category
+			enumerable : true, value : category
 		});
 
 		// ------------------------------------------------------
@@ -60,7 +60,7 @@ class Record
 		 */
 		Object.defineProperty(this, 'message',
 		{
-			enumerable : true, configurable : false, writable : false, value : message
+			enumerable : true, value : message
 		});
 
 		// ------------------------------------------------------
@@ -76,7 +76,7 @@ class Record
 		 */
 		Object.defineProperty(this, 'date',
 		{
-			enumerable : true, configurable : false, writable : false, value : new Date()
+			enumerable : true, value : new Date()
 		});
 
 		// ------------------------------------------------------
@@ -92,7 +92,7 @@ class Record
 		 */
 		Object.defineProperty(this, 'metadata',
 		{
-			enumerable : true, configurable : false, writable : false, value : metadata
+			enumerable : true, value : metadata
 		});
 	}
 }

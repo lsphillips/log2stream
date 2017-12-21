@@ -33,7 +33,7 @@ class Level
 		 * @memberof Level
 		 */
 		Object.defineProperty(this, 'name', {
-			enumerable : true, configurable : false, writable : false, value : name
+			enumerable : true, value : name
 		});
 
 		/**
@@ -46,7 +46,7 @@ class Level
 		 * @memberof Level
 		 */
 		Object.defineProperty(this, 'severity', {
-			enumerable : true, configurable : false, writable : false, value : severity
+			enumerable : true, value : severity
 		});
 	}
 
