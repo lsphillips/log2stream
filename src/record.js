@@ -26,12 +26,9 @@ class Record
 		 *
 		 * @memberof Record
 		 */
-		Object.defineProperty(this, 'level',
-		{
+		Object.defineProperty(this, 'level', {
 			enumerable : true, value : level
 		});
-
-		// ------------------------------------------------------
 
 		/**
 		 * The category of this log record.
@@ -42,12 +39,9 @@ class Record
 		 *
 		 * @memberof Record
 		 */
-		Object.defineProperty(this, 'category',
-		{
+		Object.defineProperty(this, 'category', {
 			enumerable : true, value : category
 		});
-
-		// ------------------------------------------------------
 
 		/**
 		 * The message describing this log record.
@@ -58,12 +52,9 @@ class Record
 		 *
 		 * @memberof Record
 		 */
-		Object.defineProperty(this, 'message',
-		{
+		Object.defineProperty(this, 'message', {
 			enumerable : true, value : message
 		});
-
-		// ------------------------------------------------------
 
 		/**
 		 * The date and time of when this log record was created.
@@ -74,12 +65,9 @@ class Record
 		 *
 		 * @memberof Record
 		 */
-		Object.defineProperty(this, 'date',
-		{
+		Object.defineProperty(this, 'date', {
 			enumerable : true, value : new Date()
 		});
-
-		// ------------------------------------------------------
 
 		/**
 		 * The metadata associated with this log record.
@@ -90,8 +78,7 @@ class Record
 		 *
 		 * @memberof Record
 		 */
-		Object.defineProperty(this, 'metadata',
-		{
+		Object.defineProperty(this, 'metadata', {
 			enumerable : true, value : metadata
 		});
 	}
