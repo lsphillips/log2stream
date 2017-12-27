@@ -16,6 +16,18 @@ const Record = require('../src/record');
 
 describe('class Record', function ()
 {
+	let clock = null;
+
+	beforeEach(function ()
+	{
+		clock = sinon.useFakeTimers();
+	});
+
+	afterEach(function ()
+	{
+		clock.restore();
+	});
+
 	describe('constructor(level, category, message, metadata = null)', function ()
 	{
 		it('shall set Record#level to `level`', function ()
@@ -45,10 +57,10 @@ describe('class Record', function ()
 			chai.expect(record.message).to.equal('This is an error message.');
 		});
 
-		it('shall set Record#date to the date of which the log record was created', sinon.test(function ()
+		it('shall set Record#date to the date of which the log record was created', function ()
 		{
 			// Setup.
-			this.clock.tick(699089400000);
+			clock.tick(699089400000);
 
 			// Act.
 			let record = new Record(Level.ERROR, 'Test', 'This is an error message.');
@@ -57,7 +69,7 @@ describe('class Record', function ()
 			chai.expect(
 				record.date.toISOString()
 			).to.equal('1992-02-26T07:30:00.000Z');
-		}));
+		});
 
 		it('shall set Record#metadata to `metadata`', function ()
 		{

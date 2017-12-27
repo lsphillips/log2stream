@@ -41,7 +41,7 @@ class LoggerFactory
 
 		/**
 		 * The minimum severity level that all created loggers will have.
-		 * 
+		 *
 		 * When set, all created loggers will be updated if a logger hasn't already had its minimum severity level configured.
 		 *
 		 * @instance
