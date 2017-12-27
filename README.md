@@ -141,10 +141,16 @@ logger.level = log2stream.Level.ERROR;
 However, you normally want to control logging at the application level, not at the module level. In that case you probably want to set the minimum severity level of the factory:
 
 ``` js
-factory.level = log2stream.Level.ERROR;
+factory.setLoggerLevel(log2stream.Level.ERROR);
 ```
 
-This will mean that any loggers created in the future will have its minimum severity level set to `ERROR`. In addition it will also update the minimum severity level of all loggers it is responsible for to level `ERROR`. If a logger has had its minimum severity level explicitly set, the factory responsible for it will never update the minimum severity level of said logger.
+This will mean that any loggers created in the future will have its minimum severity level set to `ERROR`. This will also update the minimum severity level of all loggers it is responsible for to level `ERROR`. If a logger has had its minimum severity level explicitly set, the factory responsible for it will never update the minimum severity level of said logger.
+
+If you want to override the minimum severity level of all created loggers regardless of whether a logger has been explicitly configured or not, then you can use the `force` flag:
+
+``` js
+factory.setLoggerLevel(log2stream.Level.ERROR, true);
+```
 
 #### Disabling logging
 
