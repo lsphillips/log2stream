@@ -157,13 +157,13 @@ factory.setLoggerLevel(log2stream.Level.ERROR, true);
 To disable all logging from a logger or factory, simply set its minimum severity level to `OFF`:
 
 ``` js
-factory.level = log2stream.Level.OFF;
+factory.setLoggerLevel(log2stream.Level.OFF);
 ```
 
 There is also the severity level `ALL` which allows log records of any severity level to be created:
 
 ``` js
-factory.level = log2stream.Level.ALL;
+factory.setLoggerLevel(log2stream.Level.ALL);
 ```
 
 ### Manipulating log records
