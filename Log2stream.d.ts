@@ -2,6 +2,10 @@
 
 // --------------------------------------------------------
 
+import * as stream from 'stream';
+
+// --------------------------------------------------------
+
 export class Level
 {
 	readonly name : string;
@@ -46,7 +50,7 @@ export class Logger
 {
 	level : Level;
 	readonly name : string;
-	readonly stream : NodeJS.ReadableStream;
+	readonly stream : stream.Readable;
 
 	constructor(name : string, level : Level);
 
@@ -63,7 +67,7 @@ export class LoggerFactory
 {
 	readonly level : Level;
 	readonly loggers : Logger[];
-	readonly stream : NodeJS.ReadableStream;
+	readonly stream : stream.Readable;
 
 	constructor(level : Level);
 
@@ -87,8 +91,8 @@ export interface RecordFilter
 
 // --------------------------------------------------------
 
-export function filter(test : RecordFilter) : NodeJS.ReadableStream;
+export function filter(test : RecordFilter) : stream.Transform;
 
 // --------------------------------------------------------
 
-export function transform(transform : RecordTransformer) : NodeJS.ReadableStream;
+export function transform(transform : RecordTransformer) : stream.Transform;

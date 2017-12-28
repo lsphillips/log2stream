@@ -58,7 +58,7 @@ class Logger
 		 *
 		 * @instance
 		 *
-		 * @type {stream.PassThrough}
+		 * @type {stream.Readable}
 		 *
 		 * @memberof Logger
 		 */
