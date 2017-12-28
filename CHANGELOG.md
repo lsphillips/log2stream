@@ -22,12 +22,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - Updated `log2stream.transform()` to not output a raw log record if the transformer throws an error.
 
-## [1.0.1] (2017-12-17)
+## [1.0.1] (2017-05-16)
 
 ### Fixed
 
 - Changed the reference to the TypeScript type definitions.
 
-## [1.0.0] (2017-12-17)
+## [1.0.0] (2017-05-16)
 
 The initial public release.
