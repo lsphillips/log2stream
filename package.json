@@ -1,7 +1,7 @@
 {
 	"name" : "log2stream",
 
-	"version" : "2.0.0",
+	"version" : "2.0.1",
 
 	"description" : "A logging library with an interface inspired by Log4j but removes the concepts of appenders and layouts in favour of streams.",
 
@@ -25,9 +25,13 @@
 		"url" : "https://github.com/lsphillips/Log2stream/issues"
 	},
 
+	"dependencies" :
+	{
+		"@types/node" : "8.5.2"
+	},
+
 	"devDependencies" :
 	{
-		"@types/node" : "8.5.2",
 		"mocha" : "4.0.1",
 		"chai" : "4.1.2",
 		"sinon" : "4.1.3",
