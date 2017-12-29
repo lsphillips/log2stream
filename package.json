@@ -52,7 +52,7 @@
 	"scripts" :
 	{
 		"lint" : "node_modules/.bin/eslint 'src/**/*.js' 'tests/**/*.js'",
-		"unit" : "node_modules/.bin/mocha --reporter spec 'tests/**/*.js'",
+		"unit" : "node_modules/.bin/mocha 'tests/**/*.js'",
 		"test" : "npm run lint && npm run unit"
 	},
 

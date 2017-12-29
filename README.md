@@ -210,11 +210,13 @@ factory.stream.pipe(filter).pipe(formatter).pipe(process.stderr);
 
 ## Getting started
 
-It's available through the Node Package Manager (NPM), so you can install it like so:
+This project is available through the Node Package Manager (NPM), so you can install it like so:
 
 ``` sh
 npm install log2stream
 ```
+
+**Please Note:** Versions of Node lower than v6.0.0 are not supported.
 
 ## Development
 
@@ -224,7 +226,7 @@ This project doesn't have much of a build process. It does have tests though; wh
 npm test
 ```
 
-This also runs code quality checks using ESLint. Please refer to the `.eslintrc` file to familiar yourself with the rules.
+This also runs code quality checks using ESLint. Please refer to the `.eslintrc` files to familiar yourself with the rules.
 
 ## License
 
