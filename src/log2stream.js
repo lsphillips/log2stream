@@ -115,7 +115,7 @@ module.exports.transform = function transform (transformer)
 		{
 			let result;
 
-			try // to transform log record.
+			try
 			{
 				result = transformer(record);
 			}
