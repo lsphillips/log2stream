@@ -75,9 +75,7 @@ describe('class LoggerFactory', function ()
 
 			// Assert.
 			expect(factory.loggers).to.have.length(3).and.to.include.members([
-				loggerA,
-				loggerB,
-				loggerC
+				loggerA, loggerB, loggerC
 			]);
 		});
 	});

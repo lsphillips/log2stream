@@ -3,8 +3,8 @@
 // Dependencies
 // --------------------------------------------------------
 
-const chai  = require('chai');
-const sinon = require('sinon');
+const { expect } = require('chai');
+const sinon      = require('sinon');
 
 // Subjects
 // --------------------------------------------------------
@@ -36,7 +36,7 @@ describe('class Record', function ()
 			let record = new Record(Level.ERROR, 'Test', 'This is an error message.');
 
 			// Assert.
-			chai.expect(record.level).to.equal(Level.ERROR);
+			expect(record.level).to.equal(Level.ERROR);
 		});
 
 		it('shall set Record#category to `category`', function ()
@@ -45,7 +45,7 @@ describe('class Record', function ()
 			let record = new Record(Level.ERROR, 'Test', 'This is an error message.');
 
 			// Assert.
-			chai.expect(record.category).to.equal('Test');
+			expect(record.category).to.equal('Test');
 		});
 
 		it('shall set Record#message to `message`', function ()
@@ -54,7 +54,7 @@ describe('class Record', function ()
 			let record = new Record(Level.ERROR, 'Test', 'This is an error message.');
 
 			// Assert.
-			chai.expect(record.message).to.equal('This is an error message.');
+			expect(record.message).to.equal('This is an error message.');
 		});
 
 		it('shall set Record#date to the date of which the log record was created', function ()
@@ -66,7 +66,7 @@ describe('class Record', function ()
 			let record = new Record(Level.ERROR, 'Test', 'This is an error message.');
 
 			// Assert.
-			chai.expect(
+			expect(
 				record.date.toISOString()
 			).to.equal('1992-02-26T07:30:00.000Z');
 		});
@@ -79,7 +79,7 @@ describe('class Record', function ()
 			let record = new Record(Level.ERROR, 'Test', 'This is an error message.', metadata);
 
 			// Assert.
-			chai.expect(record.metadata).to.equal(metadata);
+			expect(record.metadata).to.equal(metadata);
 		});
 
 		it('shall set Record#metadata to `null` when `metadata` is not provided', function ()
@@ -88,7 +88,7 @@ describe('class Record', function ()
 			let record = new Record(Level.ERROR, 'Test', 'This is an error message.');
 
 			// Assert.
-			chai.expect(record.metadata).to.be.null;
+			expect(record.metadata).to.be.null;
 		});
 	});
 
@@ -100,7 +100,7 @@ describe('class Record', function ()
 			let record = new Record(Level.ERROR, 'Test', 'This is an error message.');
 
 			// Act & Assert.
-			chai.expect(function ()
+			expect(function ()
 			{
 				record.level = Level.WARN;
 
@@ -116,7 +116,7 @@ describe('class Record', function ()
 			let record = new Record(Level.ERROR, 'Test', 'This is an error message.');
 
 			// Act & Assert.
-			chai.expect(function ()
+			expect(function ()
 			{
 				record.category = 'Another Test';
 
@@ -132,7 +132,7 @@ describe('class Record', function ()
 			let record = new Record(Level.ERROR, 'Test', 'This is an error message.');
 
 			// Act & Assert.
-			chai.expect(function ()
+			expect(function ()
 			{
 				record.message = 'This is not really an error message.';
 
@@ -148,7 +148,7 @@ describe('class Record', function ()
 			let record = new Record(Level.ERROR, 'Test', 'This is an error message.');
 
 			// Act & Assert.
-			chai.expect(function ()
+			expect(function ()
 			{
 				record.date = new Date();
 
@@ -161,7 +161,7 @@ describe('class Record', function ()
 			let record = new Record(Level.ERROR, 'Test', 'This is an error message.');
 
 			// Assert.
-			chai.expect(record.date).to.be.instanceof(Date);
+			expect(record.date).to.be.instanceof(Date);
 		});
 	});
 
@@ -173,7 +173,7 @@ describe('class Record', function ()
 			let record = new Record(Level.ERROR, 'Test', 'This is an error message.', {});
 
 			// Act & Assert.
-			chai.expect(function ()
+			expect(function ()
 			{
 				record.metadata = {};
 
