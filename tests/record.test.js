@@ -3,8 +3,8 @@
 // Dependencies
 // --------------------------------------------------------
 
-const { expect } = require('chai');
-const sinon      = require('sinon');
+const { expect }        = require('chai');
+const { useFakeTimers } = require('sinon');
 
 // Subjects
 // --------------------------------------------------------
@@ -20,7 +20,7 @@ describe('class Record', function ()
 
 	beforeEach(function ()
 	{
-		clock = sinon.useFakeTimers();
+		clock = useFakeTimers();
 	});
 
 	afterEach(function ()

@@ -119,14 +119,14 @@ describe('class Logger', function ()
 				// Setup.
 				let logger = new Logger('Test', Level.OFF);
 
-				// Setup.
-				sinon.spy(logger.stream, 'write');
+				// Spy.
+				let spy = sinon.spy(logger.stream, 'write');
 
 				// Act.
 				logger[method]('This is a message.');
 
 				// Assert.
-				expect(logger.stream.write.called).to.be.false;
+				expect(spy.called).to.be.false;
 			});
 
 			it(`shall write a log record to Logger#stream with the level of said record set to Level.${nameOfLevel}`, function (done)
@@ -190,7 +190,6 @@ describe('class Logger', function ()
 
 			it('shall write a log record to Logger#stream with the associated metadata of said record set to `metadata`', function (done)
 			{
-				// Setup.
 				let metadata = {};
 
 				// Setup.
