@@ -14,8 +14,8 @@
 	"keywords" :
 	[
 		"logging",
-		"console",
-		"stream"
+		"streams",
+		"log4j"
 	],
 
 	"homepage" : "https://github.com/lsphillips/Log2stream",
