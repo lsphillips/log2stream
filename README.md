@@ -7,60 +7,36 @@ A logging library with an interface inspired by Log4j but removes the concepts o
 
 ## Usage
 
-The TL;DR is that there are factories (usually one) which create loggers which each create log records of various severity levels that you can format, filter and manipulate freely using streams.
+The TL;DR is that there are factories (usually one) which create loggers which each create log records of various severity levels that you can format, filter and persist freely using streams.
 
 ### Logger Factories
 
-Loggers are created by a factory.
+Loggers are created by a factory:
 
 ``` js
-const factory = new log2stream.LoggerFactory(Level.WARN);
+const factory = new log2stream.LoggerFactory();
 ```
-
-This will create a factory that will create loggers with a minimum severity level of `WARN`.
 
 #### Creating Loggers
 
 Creating loggers is simple:
 
 ``` js
-const logger = factory.getLogger('category');
+const logger = factory.getLogger('name');
 ```
 
-**Note:** You can only have one logger instance with a given category. Any subsequent attempts to create a logger with the same category using the same factory will return the same logger. For example, this would evaluate to be `true`:
+**Note:** You can only have one logger instance with a given name. Any subsequent attempts to create a logger with the same name will result in the same logger being returned. For example, this would be true:
 
 ``` js
-factory.getLogger('category') === factory.getLogger('category');
+factory.getLogger('name') === factory.getLogger('name');
 ```
-
-All loggers are an instance of `log2stream.Logger`. You can retrieve all loggers that have been created by a factory by accessing `factory.loggers`.
-
-#### The factory stream
-
-All log records created by a logger are piped to the stream of the factory responsible for it.
-
-``` js
-let aWritableStream = new stream.Writable(
-{
-    write (record, _, callback)
-    {
-        // ...
-    },
-
-    objectMode : true // important!
-});
-
-factory.stream.pipe(aWritableStream);
-```
-
-**Note:** Any stream you pipe the factory stream into must have `objectMode` enabled, as log records are being streamed, not strings. Read further at the [Node.js stream documentation](https://nodejs.org/api/stream.html#stream_object_mode).
 
 ### Using a logger
 
 You can create log records that highlight severe errors that may stop the application from running:
 
 ``` js
-logger.fatal('This is a fatal message.');
+logger.fatal('This is a fatal error message.');
 ```
 
 You can create log records that highlight errors that wouldn't normally stop the application from running.
@@ -69,7 +45,7 @@ You can create log records that highlight errors that wouldn't normally stop the
 logger.error('This is an error message.');
 ```
 
-You can create log records that highlight potentially harmful situations, a.k.a warnings.
+You can create log records that highlight potentially harmful situations.
 
 ``` js
 logger.warn('This is a warning message.');
@@ -92,120 +68,86 @@ In addition to logging a string message, you may also provide additional metadat
 ``` js
 logger.warn('This is a warning message.',
 {
-    anything : 'something'
+    detail : 'Detail of what happened...'
 });
 ```
 
-#### The logger stream
+#### Severity levels
 
-All log records created by a logger that have a severity level higher than or equal to the minimum severity level of said logger are piped to its own stream.
+There are 5 levels of severity a log record can have:
+
+| Level | Logger method    | Description                                                      |
+| ----- | ---------------- | ---------------------------------------------------------------- |
+| Fatal | `logger.fatal()` | Severe errors that may stop the application from running.        |
+| Error | `logger.error()` | Errors that wouldn't normally stop the application from running. |
+| Warn  | `logger.warn()`  | Potentially harmful situations.                                  |
+| Info  | `logger.info()`  | Progress of an application.                                      |
+| Debug | `logger.debug()` | Details useful for debugging an application.                     |
+
+These levels are all exposed via the `log2stream.Level` type.
+
+### Log record streams
+
+All log records created by a logger are written to their own stream:
 
 ``` js
-let aWritableStream = new stream.Writable(
+const target = new stream.Writable(
 {
-    write (record, _, callback)
-    {
-        // ...
-    },
+  write (record, _, callback)
+  {
+    // ...
+  },
 
-    objectMode : true // Important!
+  objectMode : true // Important!
 });
 
-logger.stream.pipe(aWritableStream);
+logger.stream.pipe(target);
 ```
 
-**Note:** As mentioned earlier, the factory responsible for a logger will automatically pipe the stream of said logger into its own stream.
+Additionally, all log records created by a logger are automatically written to the stream of the factory responsible for creating it:
 
-### Severity levels
-
-There are 5 levels of severity a log record can take: (in order of severity)
-
-  - `FATAL` - Severe errors that may stop the application from running. Created by `logger.fatal()`.
-  - `ERROR` - Errors that wouldn't normally stop the application from running. Created by `logger.error()`.
-  - `WARN`  - Potentially harmful situations, a.k.a warnings. Created by `logger.warn()`.
-  - `INFO`  - Progress of an application. Created by `logger.info()`.
-  - `DEBUG` - Details useful for debugging an application. Created by `logger.debug()`.
-
-Loggers will only create log records with a severity level higher than or equal to its minimum severity level. For example, if the logger level is `WARN`, then an attempt to create a record with `logger.info()` will do nothing.
-
-These levels are exposed through the `log2stream.Level` type.
-
-#### Configuring severity levels
-
-You can set the minimum severity level for a logger:
-
-``` js
-logger.level = log2stream.Level.ERROR;
+```
+factory.stream.pipe(target);
 ```
 
-However, you normally want to control logging at the application level, not at the module level. In that case you probably want to set the minimum severity level of the factory:
+**Note:** Any stream you pipe the logger or factory streams into must have `objectMode` enabled, as log records are being streamed, not strings or buffers. Read further at the [Node.js stream documentation](https://nodejs.org/api/stream.html#stream_object_mode).
 
-``` js
-factory.setLoggerLevel(log2stream.Level.ERROR);
-```
+#### Log record structure
 
-This will mean that any loggers created in the future will have its minimum severity level set to `ERROR`. This will also update the minimum severity level of all loggers it is responsible for to level `ERROR`. If a logger has had its minimum severity level explicitly set, the factory responsible for it will never update the minimum severity level of said logger.
-
-If you want to override the minimum severity level of all created loggers regardless of whether a logger has been explicitly configured or not, then you can use the `force` flag:
-
-``` js
-factory.setLoggerLevel(log2stream.Level.ERROR, true);
-```
-
-#### Disabling logging
-
-To disable all logging from a logger or factory, simply set its minimum severity level to `OFF`:
-
-``` js
-factory.setLoggerLevel(log2stream.Level.OFF);
-```
-
-There is also the severity level `ALL` which allows log records of any severity level to be created:
-
-``` js
-factory.setLoggerLevel(log2stream.Level.ALL);
-```
-
-### Manipulating log records
-
-As mentioned earlier, Log2stream does not have the concept of appenders and layouts. You have to do that yourself using streams.
-
-#### Log records
-
-A log record is just an instance of `log2stream.Record`, which is just a dumb object with these properties:
-
-  - `level`    - The severity level of the log record. An instance of `log2stream.Level`.
-  - `category` - The category of the log record. Matches the category of the logger that created it.
-  - `message`  - The message describing the log record.
-  - `date`     - The date of which the log record was created. This is a `Date` object.
-  - `metadata` - Any metadata associated with the log record. Defaults to `null`.
+| Property   | Type     | Description                                                                     |
+| ---------- | -------- | ------------------------------------------------------------------------------- |
+| `level`    | `Level`  | The severity level. See [Severity levels](#severity-levels)                     |
+| `category` | `string` | The name of the logger that created the record.                                 |
+| `message`  | `string` | The message describing the record.                                              |
+| `date`     | `Date`   | The date and time the record was created.                                       |
+| `metadata` | `any`    | The optional data assocated with the record.                                    |
 
 #### Formatting log records
 
-To format log records you will have to pipe the stream of a factory (or logger) into a transform stream. Log2stream provides a utility to help you achieve this:
+To manipulate log records you will have to pipe the stream of a factory (or logger) into a transform stream. A utility is provided to help you achieve this:
 
 ``` js
-let formatter = log2stream.transform(function (record)
+const formatter = log2stream.transform(record =>
 {
     return `${record.category} - ${record.message}`;
 });
 
-factory.stream.pipe(formatter).pipe(process.stdout);
+factory.stream.pipe(formatter);
 ```
 
 #### Filtering log records
 
-There could be times when you want to filter log records. An example would be to pipe all log records of a severity level greater than `WARN` into the `stderr` stream.
+There could be times when you want to filter log records. An example would be to pipe all log records of a severity level greater than `Warn` into the `stderr` stream.
 
-To achieve this you will have to pipe the stream of a factory (or logger) into a transform stream. Log2stream provides a utility to help you achieve this as well:
+To achieve this you will have to pipe the stream of a factory (or logger) into a filter stream. A utility is provided to help you achieve this:
 
 ``` js
-let filter = log2stream.filter(function (record)
+const refine = log2stream.filter(record =>
 {
-    return record.level.isGreaterThan(log2stream.Level.WARN);
+    return record.level.isGreaterThan(Level.Warn);
 });
 
-factory.stream.pipe(filter).pipe(formatter).pipe(process.stderr);
+factory.stream.pipe(filter);
 ```
 
 ## Getting started

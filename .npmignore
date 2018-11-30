@@ -1,6 +1,7 @@
 # Files
 # -----------------
 
+.npmrc
 .eslintrc
 .gitignore
 .travis.yml

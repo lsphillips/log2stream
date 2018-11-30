@@ -1,7 +1,7 @@
 {
 	"name" : "log2stream",
 
-	"version" : "2.0.1",
+	"version" : "3.0.0",
 
 	"description" : "A logging library with an interface inspired by Log4j but removes the concepts of appenders and layouts in favour of streams.",
 
@@ -27,19 +27,19 @@
 
 	"dependencies" :
 	{
-		"@types/node" : "9.4.0"
+		"@types/node" : "10.12.10"
 	},
 
 	"devDependencies" :
 	{
-		"mocha" : "5.0.0",
-		"chai" : "4.1.2",
-		"sinon" : "4.2.2",
-		"eslint" : "4.17.0",
-		"eslint-plugin-import" : "2.8.0",
-		"eslint-plugin-promise" : "3.6.0",
-		"eslint-config-protect-me-from-my-stupidity" : "~2.0.4"
-	},
+		"mocha" : "5.2.0",
+		"chai" : "4.2.0",
+		"sinon" : "7.1.1",
+		"eslint" : "5.9.0",
+		"eslint-plugin-import" : "2.14.0",
+		"eslint-plugin-promise" : "4.0.1",
+		"eslint-config-protect-me-from-my-stupidity" : "~3.1.2"
+    },
 
 	"main" : "src/log2stream.js",
 
@@ -51,8 +51,8 @@
 
 	"scripts" :
 	{
-		"lint" : "eslint 'src/**/*.js' 'tests/**/*.js'",
-		"unit" : "mocha 'tests/**/*.js'",
+		"lint" : "eslint \"src/**/*.js\" \"tests/**/*.js\"",
+		"unit" : "mocha \"tests/**/*.js\"",
 		"test" : "npm run lint && npm run unit"
 	},
 

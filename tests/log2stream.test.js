@@ -1,21 +1,16 @@
 'use strict';
 
-// Dependencies
-// --------------------------------------------------------
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-const stream     = require('stream');
-const { expect } = require('chai');
-
-// Subjects
-// --------------------------------------------------------
-
+const stream        = require('stream');
+const { expect }    = require('chai');
 const Logger        = require('../src/logger');
 const Record        = require('../src/record');
 const Level         = require('../src/level');
 const LoggerFactory = require('../src/loggerFactory');
 const Log2stream    = require('../src/log2stream');
 
-// --------------------------------------------------------
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 describe('log2stream', function ()
 {
@@ -57,7 +52,7 @@ describe('log2stream', function ()
 
 	describe('.filter(test)', function ()
 	{
-		it('shall return a stream that is a `Transform` stream', function ()
+		it('shall return a transformation stream', function ()
 		{
 			// Act & Assert.
 			expect(
@@ -68,18 +63,18 @@ describe('log2stream', function ()
 			).to.be.instanceof(stream.Transform);
 		});
 
-		it('shall return a stream that will filter log records that do not satisfy the `test` function', function (done)
+		it('shall return a stream that will filter log records that do not pass the `test` function', function (done)
 		{
-			let anExampleRecord = new Record(Level.ERROR, 'Category', 'This is an error message.');
+			let anExampleRecord = new Record(Level.Error, 'Category', 'This is an error message.');
 
 			// Setup.
-			let transformer = Log2stream.filter(function (record)
+			let transformer = Log2stream.filter(record =>
 			{
-				return record.level === Level.ERROR;
+				return record.level === Level.Error;
 			});
 
 			// Setup.
-			transformer.on('data', function (record)
+			transformer.on('data', record =>
 			{
 				// Assert.
 				expect(record).to.equal(anExampleRecord);
@@ -89,17 +84,40 @@ describe('log2stream', function ()
 
 			// Act.
 			transformer.write(
-				new Record(Level.WARN, 'Another Category', 'This is a warning message.')
+				new Record(Level.Warn, 'Another Category', 'This is a warning message.')
 			);
 
 			// Act.
 			transformer.write(anExampleRecord);
 		});
+
+		it('shall return a stream that will emit an error if the `test` function fails', function (done)
+		{
+			// Setup.
+			let transformer = Log2stream.filter(() =>
+			{
+				throw new Error('The record could not be tested.');
+			});
+
+			// Setup.
+			transformer.on('error', error =>
+			{
+				// Assert.
+				expect(error).to.be.instanceOf(Error);
+
+				done();
+			});
+
+			// Act.
+			transformer.write(
+				new Record(Level.Warn, 'Another Category', 'This is a warning message.')
+			);
+		});
 	});
 
 	describe('.transform(transform)', function ()
 	{
-		it('shall return a stream that is a `Transform` stream', function ()
+		it('shall return a transformation stream', function ()
 		{
 			// Act & Assert.
 			expect(
@@ -113,23 +131,46 @@ describe('log2stream', function ()
 		it('shall return a stream that transforms all log records written to it using the `transform` function', function (done)
 		{
 			// Setup.
-			let transformer = Log2stream.transform(function (record)
+			let transformer = Log2stream.transform(record =>
 			{
 				return `[${record.level}] ${record.category} - ${record.message}`;
 			});
 
 			// Setup.
-			transformer.on('data', function (record)
+			transformer.on('data', record =>
 			{
 				// Assert.
-				expect(record).to.equal('[ERROR] Category - This is an error message.');
+				expect(record).to.equal('[Error] Category - This is an error message.');
 
 				done();
 			});
 
 			// Act.
 			transformer.write(
-				new Record(Level.ERROR, 'Category', 'This is an error message.')
+				new Record(Level.Error, 'Category', 'This is an error message.')
+			);
+		});
+
+		it('shall return a stream that will emit an error if the `transform` function fails', function (done)
+		{
+			// Setup.
+			let transformer = Log2stream.transform(() =>
+			{
+				throw new Error('The record could not be transformed.');
+			});
+
+			// Setup.
+			transformer.on('error', error =>
+			{
+				// Assert.
+				expect(error).to.be.instanceOf(Error);
+
+				done();
+			});
+
+			// Act.
+			transformer.write(
+				new Record(Level.Warn, 'Another Category', 'This is a warning message.')
 			);
 		});
 	});

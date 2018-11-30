@@ -1,59 +1,17 @@
 'use strict';
 
-// Dependencies
-// --------------------------------------------------------
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-const stream     = require('stream');
-const { expect } = require('chai');
+const stream                            = require('stream');
+const { expect }                        = require('chai');
+const { Logger, Record, LoggerFactory } = require('../src/log2stream');
 
-// Subjects
-// --------------------------------------------------------
-
-const Level         = require('../src/level');
-const Logger        = require('../src/logger');
-const Record        = require('../src/record');
-const LoggerFactory = require('../src/loggerFactory');
-
-// --------------------------------------------------------
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 describe('class LoggerFactory', function ()
 {
-	describe('constructor(level)', function ()
-	{
-		it('shall set LoggerFactory#level to `level`', function ()
-		{
-			// Act.
-			let factory = new LoggerFactory(Level.ERROR);
-
-			// Assert.
-			expect(factory.level).to.equal(Level.ERROR);
-		});
-
-		it('shall set LoggerFactory#level to Level.ALL when `level` is not provided', function ()
-		{
-			// Act.
-			let factory = new LoggerFactory();
-
-			// Assert.
-			expect(factory.level).to.equal(Level.ALL);
-		});
-	});
-
 	describe('#loggers', function ()
 	{
-		it('shall not be overwritable', function ()
-		{
-			// Setup.
-			let factory = new LoggerFactory();
-
-			// Act & Assert.
-			expect(function ()
-			{
-				factory.loggers = [];
-
-			}).to.throw(TypeError);
-		});
-
 		it('shall be empty when a new factory is created', function ()
 		{
 			// Setup.
@@ -82,16 +40,16 @@ describe('class LoggerFactory', function ()
 
 	describe('#stream', function ()
 	{
-		it('shall be a `Duplex` stream', function ()
+		it('shall be a stream that is readable', function ()
 		{
 			// Setup.
 			let factory = new LoggerFactory();
 
 			// Act & Assert.
-			expect(factory.stream).to.be.instanceof(stream.Duplex);
+			expect(factory.stream).to.be.instanceof(stream.Readable);
 		});
 
-		it('shall allow for an infinite number of listeners', function ()
+		it('shall be a stream that allows an infinite number of listeners', function ()
 		{
 			// Setup.
 			let factory = new LoggerFactory();
@@ -102,7 +60,7 @@ describe('class LoggerFactory', function ()
 			).to.equal(Infinity);
 		});
 
-		it('shall be initially paused', function ()
+		it('shall be a stream that is initially paused', function ()
 		{
 			// Setup.
 			let factory = new LoggerFactory();
@@ -112,114 +70,19 @@ describe('class LoggerFactory', function ()
 				factory.stream.isPaused()
 			).to.be.true;
 		});
-
-		it('shall not be overwritable', function ()
-		{
-			// Setup.
-			let factory = new LoggerFactory();
-
-			// Act & Assert.
-			expect(function ()
-			{
-				factory.stream = new stream.PassThrough();
-
-			}).to.throw(TypeError);
-		});
-	});
-
-	describe('#setLoggerLevel(level, force)', function ()
-	{
-		it('shall set LoggerFactory#level to `level`', function ()
-		{
-			// Setup.
-			let factory = new LoggerFactory();
-
-			// Act.
-			factory.setLoggerLevel(Level.WARN);
-
-			// Assert.
-			expect(factory.level).to.equal(Level.WARN);
-		});
-
-		it('shall throw a type error when `level` is not an instance of `Level`', function ()
-		{
-			// Setup.
-			let factory = new LoggerFactory();
-
-			// Act & Assert.
-			expect(function ()
-			{
-				factory.setLoggerLevel(null);
-
-			}).to.throw(TypeError);
-		});
-
-		it('shall update all existing loggers that have not had their minimum severity level manually changed when `force` is `false` or ommitted', function ()
-		{
-			// Setup.
-			let factory = new LoggerFactory();
-
-			// Setup.
-			let loggerA = factory.getLogger('loggerA'),
-			    loggerB = factory.getLogger('loggerB'),
-			    loggerC = factory.getLogger('loggerC');
-
-			// Setup.
-			loggerB.level = Level.INFO;
-
-			// Act.
-			factory.setLoggerLevel(Level.ERROR);
-
-			// Assert.
-			expect(loggerA.level).to.equal(Level.ERROR);
-			expect(loggerB.level).to.equal(Level.INFO);
-			expect(loggerC.level).to.equal(Level.ERROR);
-
-			// Act.
-			factory.setLoggerLevel(Level.WARN, false);
-
-			// Assert.
-			expect(loggerA.level).to.equal(Level.WARN);
-			expect(loggerB.level).to.equal(Level.INFO);
-			expect(loggerC.level).to.equal(Level.WARN);
-		});
-
-		it('shall update all existing loggers when `force` is `true`', function ()
-		{
-			// Setup.
-			let factory = new LoggerFactory();
-
-			// Setup.
-			let loggerA = factory.getLogger('loggerA'),
-			    loggerB = factory.getLogger('loggerB'),
-			    loggerC = factory.getLogger('loggerC');
-
-			// Setup.
-			loggerB.level = Level.INFO;
-
-			// Act.
-			factory.setLoggerLevel(Level.ERROR, true);
-
-			// Assert.
-			expect(loggerA.level).to.equal(Level.ERROR);
-			expect(loggerB.level).to.equal(Level.ERROR);
-			expect(loggerC.level).to.equal(Level.ERROR);
-		});
 	});
 
 	describe('#getLogger(name)', function ()
 	{
-		it('shall create and return a logger with its name set to `name` and its level initially set to LoggerFactory#level', function ()
+		it('shall create and return a logger with its name set to `name`', function ()
 		{
 			// Setup.
-			let factory = new LoggerFactory(Level.WARN);
+			let factory = new LoggerFactory();
 
 			// Act & Assert.
 			expect(
 				factory.getLogger('Test')
-			).to.be.instanceof(Logger).and.to.include({
-				level : Level.WARN, name : 'Test'
-			});
+			).to.be.instanceof(Logger);
 		});
 
 		it('shall pipe all log records logged by the created logger into LoggerFactory#stream', function (done)
@@ -231,7 +94,7 @@ describe('class LoggerFactory', function ()
 			let logger = factory.getLogger('Test');
 
 			// Setup.
-			factory.stream.on('data', function (record)
+			factory.stream.on('data', record =>
 			{
 				expect(record).to.be.instanceof(Record);
 

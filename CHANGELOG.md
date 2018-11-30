@@ -2,6 +2,27 @@
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0] (2018-11-30)
+
+### Added
+
+- Introduced documentation to the Typescript type definitons.
+
+### Changed
+
+- Loggers and factories no longer have a minimum severity level associated with them. Loggers will always produce log records.
+- Levels are now named using pascal case rather that uppercase, for example `Level.ERROR` is now `Level.Error`.
+
+### Removed
+
+- `Level.toLevel()` no longer accepts a second argument to return a default if a corresponding level can't be found.
+- `Level.Off` and `Level.All` no longer exist.
+
+### Fixed
+
+- `log2stream.transform()` will correctly fail when the provided transformer function fails.
+- `log2stream.filter()` will correctly fail when the provided test function fails.
+
 ## [2.0.1] (2017-12-28)
 
 ### Fixed

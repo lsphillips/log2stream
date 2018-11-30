@@ -1,18 +1,12 @@
 'use strict';
 
-// Dependencies
-// --------------------------------------------------------
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 const { expect }        = require('chai');
 const { useFakeTimers } = require('sinon');
+const { Level, Record } = require('../src/log2stream');
 
-// Subjects
-// --------------------------------------------------------
-
-const Level  = require('../src/level');
-const Record = require('../src/record');
-
-// --------------------------------------------------------
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 describe('class Record', function ()
 {
@@ -66,6 +60,9 @@ describe('class Record', function ()
 			let record = new Record(Level.ERROR, 'Test', 'This is an error message.');
 
 			// Assert.
+			expect(record.date).to.be.instanceof(Date);
+
+			// Assert.
 			expect(
 				record.date.toISOString()
 			).to.equal('1992-02-26T07:30:00.000Z');
@@ -89,95 +86,6 @@ describe('class Record', function ()
 
 			// Assert.
 			expect(record.metadata).to.be.null;
-		});
-	});
-
-	describe('#level', function ()
-	{
-		it('shall not be overwritable', function ()
-		{
-			// Setup.
-			let record = new Record(Level.ERROR, 'Test', 'This is an error message.');
-
-			// Act & Assert.
-			expect(function ()
-			{
-				record.level = Level.WARN;
-
-			}).to.throw(TypeError);
-		});
-	});
-
-	describe('#category', function ()
-	{
-		it('shall not be overwritable', function ()
-		{
-			// Setup.
-			let record = new Record(Level.ERROR, 'Test', 'This is an error message.');
-
-			// Act & Assert.
-			expect(function ()
-			{
-				record.category = 'Another Test';
-
-			}).to.throw(TypeError);
-		});
-	});
-
-	describe('#message', function ()
-	{
-		it('shall not be overwritable', function ()
-		{
-			// Setup.
-			let record = new Record(Level.ERROR, 'Test', 'This is an error message.');
-
-			// Act & Assert.
-			expect(function ()
-			{
-				record.message = 'This is not really an error message.';
-
-			}).to.throw(TypeError);
-		});
-	});
-
-	describe('#date', function ()
-	{
-		it('shall not be overwritable', function ()
-		{
-			// Setup.
-			let record = new Record(Level.ERROR, 'Test', 'This is an error message.');
-
-			// Act & Assert.
-			expect(function ()
-			{
-				record.date = new Date();
-
-			}).to.throw(TypeError);
-		});
-
-		it('shall be an instance of `Date`', function ()
-		{
-			// Act.
-			let record = new Record(Level.ERROR, 'Test', 'This is an error message.');
-
-			// Assert.
-			expect(record.date).to.be.instanceof(Date);
-		});
-	});
-
-	describe('#metadata', function ()
-	{
-		it('shall not be overwritable', function ()
-		{
-			// Setup.
-			let record = new Record(Level.ERROR, 'Test', 'This is an error message.', {});
-
-			// Act & Assert.
-			expect(function ()
-			{
-				record.metadata = {};
-
-			}).to.throw(TypeError);
 		});
 	});
 });
