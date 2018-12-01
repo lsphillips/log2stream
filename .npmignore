@@ -3,6 +3,7 @@
 
 .npmrc
 .eslintrc
+.editorconfig
 .gitignore
 .travis.yml
 
