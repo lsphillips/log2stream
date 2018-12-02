@@ -2,6 +2,12 @@
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.1] (2018-12-02)
+
+### Changed
+
+- Updated the documentation.
+
 ## [3.0.0] (2018-11-30)
 
 ### Added

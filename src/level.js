@@ -50,9 +50,9 @@ class Level
 		return this.name;
 	}
 
-	static toLevel (stringToConvert)
+	static toLevel (string)
 	{
-		let level = Level[stringToConvert];
+		let level = Level[string];
 
 		if (level instanceof Level)
 		{

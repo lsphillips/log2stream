@@ -74,15 +74,15 @@ logger.warn('This is a warning message.',
 
 #### Severity levels
 
-There are 5 levels of severity a log record can have:
+There are 5 predefined levels of severity a log record can have:
 
-| Level | Logger method    | Description                                                      |
-| ----- | ---------------- | ---------------------------------------------------------------- |
-| Fatal | `logger.fatal()` | Severe errors that may stop the application from running.        |
-| Error | `logger.error()` | Errors that wouldn't normally stop the application from running. |
-| Warn  | `logger.warn()`  | Potentially harmful situations.                                  |
-| Info  | `logger.info()`  | Progress of an application.                                      |
-| Debug | `logger.debug()` | Details useful for debugging an application.                     |
+| Level | Corresponding logger method    | Description                                                      |
+| ----- | ------------------------------ | ---------------------------------------------------------------- |
+| Fatal | `logger.fatal()`               | Severe errors that may stop the application from running.        |
+| Error | `logger.error()`               | Errors that wouldn't normally stop the application from running. |
+| Warn  | `logger.warn()`                | Potentially harmful situations.                                  |
+| Info  | `logger.info()`                | Progress of an application.                                      |
+| Debug | `logger.debug()`               | Details useful for debugging an application.                     |
 
 These levels are all exposed via the `log2stream.Level` type.
 
@@ -124,7 +124,7 @@ factory.stream.pipe(target);
 
 #### Formatting log records
 
-To manipulate log records you will have to pipe the stream of a factory (or logger) into a transform stream. A utility is provided to help you achieve this:
+To manipulate log records you will have to pipe the stream of a factory (or logger) into a transformation stream. A utility is provided to help you achieve this:
 
 ``` js
 const formatter = log2stream.transform(record =>

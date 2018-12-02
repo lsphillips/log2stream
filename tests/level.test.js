@@ -58,9 +58,9 @@ describe('class Level', function ()
 		});
 	});
 
-	describe('.toLevel(stringToConvert)', function ()
+	describe('.toLevel(string)', function ()
 	{
-		it('shall return the defined level with `stringToConvert` as its name', function ()
+		it('shall return the predefined level with `string` as its name', function ()
 		{
 			// Act & Assert.
 			expect(
@@ -68,7 +68,7 @@ describe('class Level', function ()
 			).to.equal(Level.Error);
 		});
 
-		it('shall return `null` if no defined level exists with `stringToConvert` as its name', function ()
+		it('shall return `null` if no predefined level exists with `string` as its name', function ()
 		{
 			// Act & Assert.
 			expect(

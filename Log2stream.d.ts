@@ -2,7 +2,7 @@
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-import { Readable, Transform } from 'stream';
+import * as stream from 'stream';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -11,6 +11,12 @@ import { Readable, Transform } from 'stream';
  */
 export class Level
 {
+	/**
+	 * Creates a new level.
+	 *
+	 * @param name     The name of the level.
+	 * @param severity The severity of the level, this will be used to compare the level with other levels.
+	 */
 	constructor(name : string, severity : number);
 
 	/**
@@ -23,15 +29,17 @@ export class Level
 	 *
 	 * Example usage:
 	 *
-	 * ```
-	 * // true
+	 * ``` js
 	 * Level.Info.isEqualTo(Level.Info);
+	 * // => true
 	 *
-	 * // false
 	 * Level.Info.isEqualTo(Level.Warn);
+	 * // => false
 	 * ```
 	 *
 	 * @param level The level to compare to this level.
+	 *
+	 * @returns `true` if this level is of equal severity to `level`, otherwise `false`.
 	 */
 	isEqualTo(level : Level) : boolean;
 
@@ -40,15 +48,17 @@ export class Level
 	 *
 	 * Example usage:
 	 *
-	 * ```
-	 * // true
+	 * ``` js
 	 * Level.Warn.isLessThan(Level.Error);
+	 * // => true
 	 *
-	 * // false
 	 * Level.Warn.isLessThan(Level.Debug);
+	 * // => false
 	 * ```
 	 *
 	 * @param level The level to compare to this level.
+	 *
+	 * @returns `true` if this level is less severe than `level`, otherwise `false`.
 	 */
 	isLessThan(level : Level) : boolean;
 
@@ -57,18 +67,20 @@ export class Level
 	 *
 	 * Example usage:
 	 *
-	 * ```
-	 * // true
+	 * ``` js
 	 * Level.Warn.isLessThanOrEqualTo(Level.Warn);
+	 * // => true
 	 *
-	 * // true
 	 * Level.Warn.isLessThanOrEqualTo(Level.Error);
+	 * // => true
 	 *
-	 * // false
 	 * Level.Warn.isLessThanOrEqualTo(Level.Debug);
+	 * // => false
 	 * ```
 	 *
 	 * @param level The level to compare to this level.
+	 *
+	 * @returns `true` if this level is less severe than or equally severe to `level`, otherwise `false`.
 	 */
 	isLessThanOrEqualTo(level : Level) : boolean;
 
@@ -77,15 +89,17 @@ export class Level
 	 *
 	 * Example usage:
 	 *
-	 * ```
-	 * // true
+	 * ``` js
 	 * Level.Warn.isGreaterThan(Level.Info);
+	 * // => true
 	 *
-	 * // false
 	 * Level.Warn.isGreaterThan(Level.Fatal);
+	 * // => false
 	 * ```
 	 *
 	 * @param level The level to compare to this level.
+	 *
+	 * @returns `true` if this level is more severe than `level`, otherwise `false`.
 	 */
 	isGreaterThan(level : Level) : boolean;
 
@@ -94,58 +108,67 @@ export class Level
 	 *
 	 * Example usage:
 	 *
-	 * ```
-	 * // true
+	 * ``` js
 	 * Level.Warn.isGreaterThanOrEqualTo(Level.Warn);
+	 * // => true
 	 *
-	 * // true
 	 * Level.Warn.isGreaterThanOrEqualTo(Level.Debug);
+	 * // => true
 	 *
-	 * // false
 	 * Level.Warn.isGreaterThanOrEqualTo(Level.Error);
+	 * // => false
 	 * ```
 	 *
 	 * @param level The level to compare to this level.
+	 *
+	 * @returns `true` if this level is more severe than or equally severe to `level`, otherwise `false`.
 	 */
 	isGreaterThanOrEqualTo(level : Level) : boolean;
 
 	/**
-	 * Converts a string to a severity level.
+	 * Converts a string into a predefined level. If a level could not be determined, `null` will be returned instead.
 	 *
 	 * Example usage:
 	 *
-	 * ```
-	 * Level.toLevel('Error') === Level.Error;
+	 * ``` js
+	 * Level.toLevel('Error');
+	 * // => Level.Error
+	 *
+	 * Level.toLevel('Info');
+	 * // => Level.Info
+	 *
+	 * Level.toLevel('Trace');
+	 * // => null
 	 * ```
 	 *
-	 * If a corresponding severity level can't be determined then `null` will be returned.
+	 * @param string The string to convert into a level.
 	 *
-	 * @param stringToConvert The string to convert into a severity level.
+	 * @returns The predefined level corresponding to `string`, or `null` if a level could not be determined.
 	 */
-	static toLevel(stringToConvert : string) : Level | null;
+	static toLevel(string : string) : Level | null;
 
 	/**
-	 * Represents details useful for debugging an application.
+	 * A predefined level that represents details useful for debugging an application.
 	 */
 	static readonly Debug : Level;
 
 	/**
-	 * Represents progress of an application.
+	 * A predefined level that represents progress of an application.
 	 */
 	static readonly Info : Level;
 
 	/**
-	 * Represents potentially harmful situations.
+	 * A predefined level that represents potentially harmful situations.
 	 */
 	static readonly Warn : Level;
 
 	/**
-	 * Represents errors that wouldn't normally stop the application from running.
+	 * A predefined level that represents errors that wouldn't normally stop the application from running.
 	 */
 	static readonly Error : Level;
 
 	/**
-	 * Represents errors that wouldn't normally stop the application from running.
+	 * A predefined level that represents errors that wouldn't normally stop the application from running.
 	 */
 	static readonly Fatal : Level;
 }
@@ -174,6 +197,8 @@ export class Record
 
 	/**
 	 * The category of this log record.
+	 *
+	 * This will likely be the name of the logger that created this log record.
 	 */
 	readonly category : string;
 
@@ -213,16 +238,16 @@ export class Logger
 	readonly name : string;
 
 	/**
-	 * The stream that all log records created by this logger will be written too.
+	 * The stream that this logger will write log records to.
 	 */
-	readonly stream : Readable;
+	readonly stream : stream.Readable;
 
 	/**
-	 * Creates a log record that is useful for debugging an application.
+	 * Writes a log record that is useful for debugging an application.
 	 *
 	 * Example usage:
 	 *
-	 * ```
+	 * ``` js
 	 * logger.debug('Something happened.', {
 	 *     detail : 'Detail on what happened...'
 	 * });
@@ -238,7 +263,7 @@ export class Logger
 	 *
 	 * Example usage:
 	 *
-	 * ```
+	 * ``` js
 	 * logger.info('Something happened.', {
 	 *     detail : 'Detail on what happened...'
 	 * });
@@ -254,7 +279,7 @@ export class Logger
 	 *
 	 * Example usage:
 	 *
-	 * ```
+	 * ``` js
 	 * logger.warn('Something potentially alarming happened.', {
 	 *     detail : 'Detail on what happened...'
 	 * });
@@ -270,7 +295,7 @@ export class Logger
 	 *
 	 * Example usage:
 	 *
-	 * ```
+	 * ``` js
 	 * logger.error('Something bad happened.', {
 	 *     detail : 'Detail on what happened...'
 	 * });
@@ -286,7 +311,7 @@ export class Logger
 	 *
 	 * Example usage:
 	 *
-	 * ```
+	 * ``` js
 	 * logger.fatal('Something really bad happened.', {
 	 *     detail : 'Detail on what happened...'
 	 * });
@@ -306,21 +331,21 @@ export class Logger
 export class LoggerFactory
 {
 	/**
-	 * The loggers that have already been created by this factory.
+	 * The loggers that have been created by this factory.
 	 */
 	readonly loggers : Logger[];
 
 	/**
 	 * The stream that all loggers created by this factory will write log records to.
 	 */
-	readonly stream : Readable;
+	readonly stream : stream.Readable;
 
 	/**
 	 * Creates a logger.
 	 *
 	 * Example usage:
 	 *
-	 * ```
+	 * ``` js
 	 * const logger = factory.getLogger('http');
 	 *
 	 * logger.error('A request has failed.', {
@@ -328,9 +353,16 @@ export class LoggerFactory
 	 * });
 	 * ```
 	 *
-	 * If a logger already exists with the provided name, that logger will be returned instead.
+	 * If a logger already exists with the provided name, then that logger will be returned instead:
+	 *
+	 * ``` js
+	 * factory.getLogger('http') === factory.getLogger('http');
+	 * // => true
+	 * ```
 	 *
 	 * @param name The name of the logger.
+	 *
+	 * @returns The created logger, or the already existing logger with `name` as its name.
 	 */
 	getLogger(name : string) : Logger;
 }
@@ -339,6 +371,10 @@ export class LoggerFactory
 
 /**
  * A synchronous function that will transform a log record into something else.
+ *
+ * @param record The log record being transformed.
+ *
+ * @returns The transformed log record.
  */
 export interface RecordTransformer
 {
@@ -346,7 +382,11 @@ export interface RecordTransformer
 }
 
 /**
- * A synchronous function that will determine whether a log record meets a condition.
+ * A synchronous function that will determine whether a log record meets some condition(s).
+ *
+ * @param record The log record being tested.
+ *
+ * @returns `true` if the record meets the condition(s), otherwise `false`.
  */
 export interface RecordTester
 {
@@ -356,29 +396,11 @@ export interface RecordTester
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 /**
- * Creates a transform stream that will only output the input log record that passes a test.
+ * Creates a transformation stream that will output the input log record transformed by a given transformer.
  *
  * Example usage:
  *
- * ```
- * const refine = filter(record =>
- * {
- *     return record.level.isGreaterThan(Level.WARN);
- * });
- *
- * factory.stream.pipe(refine);
- * ```
- *
- * @param test A function to determine whether a log record meets a condition.
- */
-export function filter(test : RecordTester) : Transform;
-
-/**
- * Creates a transform stream that will output the input log record transformed by a transformer.
- *
- * Example usage:
- *
- * ```
+ * ``` js
  * const formatter = transform(record =>
  * {
  *     return `${record.category} - ${record.message}`;
@@ -387,6 +409,28 @@ export function filter(test : RecordTester) : Transform;
  * factory.stream.pipe(formatter);
  * ```
  *
- * @param transform The function that will be used to transform each log record.
+ * @param transform The function that will be used to transform each input log record.
+ *
+ * @returns A transformation stream that you can pipe a stream of log records into.
  */
-export function transform(transform : RecordTransformer) : Transform;
+export function transform(transform : RecordTransformer) : stream.Transform;
+
+/**
+ * Creates a transformation stream that will only output the input log record if said log record passes a given test.
+ *
+ * Example usage:
+ *
+ * ``` js
+ * const refine = filter(record =>
+ * {
+ *     return record.level.isGreaterThan(Level.WARN);
+ * });
+ *
+ * factory.stream.pipe(refine);
+ * ```
+ *
+ * @param test The function that will be used to test each input log record.
+ *
+ * @returns A transformation stream that you can pipe a stream of log records into.
+ */
+export function filter(test : RecordTester) : stream.Transform;
