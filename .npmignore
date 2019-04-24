@@ -5,6 +5,10 @@
 .eslintrc
 .editorconfig
 .gitignore
+
+# Travis
+# -----------------
+
 .travis.yml
 
 # Directories

@@ -158,7 +158,7 @@ This project is available through the Node Package Manager (NPM), so you can ins
 npm install log2stream
 ```
 
-**Please Note:** Versions of Node lower than v6.0.0 are not supported.
+**Please Note:** Versions of Node lower than **v6.0.0** are not supported.
 
 ## Development
 
