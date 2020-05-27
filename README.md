@@ -1,7 +1,7 @@
 # Log2stream
 
 [![Available from NPM](https://img.shields.io/npm/v/log2stream.svg?maxAge=900)](https://www.npmjs.com/package/log2stream)
-[![Built using Travis](https://img.shields.io/travis/lsphillips/Log2stream/master.svg?maxAge=900)](https://travis-ci.org/lsphillips/Log2stream)
+[![Built using Travis](https://img.shields.io/travis/com/lsphillips/Log2stream/master.svg?maxAge=900)](https://travis-ci.com/lsphillips/Log2stream)
 
 A logging library with an interface inspired by Log4j but removes the concepts of appenders and layouts in favour of streams.
 
