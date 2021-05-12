@@ -1,7 +1,4 @@
-'use strict';
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-module.exports = class Record
+export default class Record
 {
 	constructor (level, category, message, metadata = null)
 	{
@@ -25,4 +22,4 @@ module.exports = class Record
 			enumerable : true, value : metadata
 		});
 	}
-};
+}

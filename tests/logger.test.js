@@ -1,10 +1,6 @@
-'use strict';
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-const stream            = require('stream');
-const { expect }        = require('chai');
-const { Level, Logger } = require('../src/log2stream');
+import * as stream       from 'stream';
+import { expect }        from 'chai';
+import { Level, Logger } from '../src/log2stream.js';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

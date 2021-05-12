@@ -1,12 +1,8 @@
-'use strict';
+import { Transform } from 'stream';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-const { Transform } = require('stream');
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-module.exports = function filter (test)
+export default function filter (test)
 {
 	return new Transform({
 
@@ -37,4 +33,4 @@ module.exports = function filter (test)
 
 		objectMode : true
 	});
-};
+}

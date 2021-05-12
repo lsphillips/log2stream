@@ -1,10 +1,6 @@
-'use strict';
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-const { expect }        = require('chai');
-const { useFakeTimers } = require('sinon');
-const { Level, Record } = require('../src/log2stream');
+import sinon             from 'sinon';
+import { expect }        from 'chai';
+import { Level, Record } from '../src/log2stream.js';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -14,7 +10,7 @@ describe('class Record', function ()
 
 	beforeEach(function ()
 	{
-		clock = useFakeTimers();
+		clock = sinon.useFakeTimers();
 	});
 
 	afterEach(function ()

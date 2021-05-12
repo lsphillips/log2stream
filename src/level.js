@@ -1,7 +1,3 @@
-'use strict';
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 class Level
 {
 	constructor (name, severity)
@@ -73,4 +69,4 @@ Level.Fatal = new Level('Fatal', 5);
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-module.exports = Level;
+export default Level;

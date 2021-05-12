@@ -1,9 +1,5 @@
-'use strict';
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-const { expect } = require('chai');
-const { Level }  = require('../src/log2stream');
+import { expect } from 'chai';
+import { Level }  from '../src/log2stream.js';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

@@ -1,0 +1,15 @@
+{
+	"extends" :
+	[
+		"protect-me-from-my-stupidity",
+		"protect-me-from-my-stupidity/and/from-writing-stupid-node-applications"
+	],
+
+	"env" :
+	{
+		"node" : true,
+		"es6"  : true
+	},
+
+	"root" : true
+}

@@ -1,14 +1,10 @@
-'use strict';
+import { PassThrough } from 'stream';
+import Level           from './level.js';
+import Record          from './record.js';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-const { PassThrough } = require('stream');
-const Level           = require('./level');
-const Record          = require('./record');
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-module.exports = class Logger
+export default class Logger
 {
 	constructor (name)
 	{
@@ -58,4 +54,4 @@ module.exports = class Logger
 			new Record(Level.Fatal, this.name, message, metadata)
 		);
 	}
-};
+}

@@ -1,13 +1,9 @@
-'use strict';
+import { PassThrough } from 'stream';
+import Logger          from './logger.js';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-const { PassThrough } = require('stream');
-const Logger          = require('./logger');
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-module.exports = class LoggerFactory
+export default class LoggerFactory
 {
 	constructor ()
 	{
@@ -38,4 +34,4 @@ module.exports = class LoggerFactory
 
 		return logger;
 	}
-};
+}
