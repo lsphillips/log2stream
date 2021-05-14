@@ -9,12 +9,28 @@ A logging library with an interface inspired by Log4j but removes the concepts o
 
 The TL;DR is that there are factories (usually one) which create loggers which each create log records of various severity levels that you can format, filter and persist freely using streams.
 
+This module can be treated as an ES module:
+
+``` js
+import * as log2stream from 'log2stream';
+// or
+import { LoggerFactory } from 'crumble';
+```
+
+This module can also be treated as a CommonJS module:
+
+``` js
+const log2stream = require('log2stream');
+// or
+const { LoggerFactory } = require('log2stream');
+```
+
 ### Logger Factories
 
 Loggers are created by a factory:
 
 ``` js
-const factory = new log2stream.LoggerFactory();
+const factory = new LoggerFactory();
 ```
 
 #### Creating Loggers
@@ -158,7 +174,7 @@ This project is available through the Node Package Manager (NPM), so you can ins
 npm install log2stream
 ```
 
-**Please Note:** Versions of Node lower than **v6.0.0** are not supported.
+**Please Note:** Versions of Node lower than **v12.0.0** are not supported.
 
 ## Development
 
