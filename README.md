@@ -14,7 +14,7 @@ This module can be treated as an ES module:
 ``` js
 import * as log2stream from 'log2stream';
 // or
-import { LoggerFactory } from 'crumble';
+import { LoggerFactory } from 'log2stream';
 ```
 
 This module can also be treated as a CommonJS module:
