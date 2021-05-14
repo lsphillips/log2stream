@@ -178,7 +178,17 @@ npm install log2stream
 
 ## Development
 
-This project doesn't have much of a build process. It does have tests though; which you can run like so:
+### Building
+
+You can build a CommonJS version of this module that is also minified:
+
+``` sh
+npm run build
+```
+
+### Testing
+
+This module also has a robust test suite:
 
 ``` sh
 npm test
