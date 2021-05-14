@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
-- This library provides two different exports, a CommonJS version when being imported using `require` (the default) and an ES Module version when being imported using `import`.
+- This module has two different versions of this module, a CommonJS version for when it is being imported using `require` and an ESM version for when it is being imported using `import`.
 
 ### Changed
 
