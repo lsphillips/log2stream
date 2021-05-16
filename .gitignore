@@ -1,4 +1,4 @@
-# NPM
+# Dependencies
 # -----------------
 
 /node_modules
@@ -6,4 +6,10 @@
 # Build
 # -----------------
 
+/log2stream.js
 /log2stream.cjs
+
+# Pack
+# -----------------
+
+*.tgz

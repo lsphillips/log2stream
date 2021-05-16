@@ -2,24 +2,38 @@ import { terser } from 'rollup-plugin-terser';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-export default {
+function bundle (output)
+{
+	return {
 
-	plugins :
-	[
-		terser()
-	],
+		input : './src/log2stream.js',
 
-	input : './src/log2stream.js',
+		plugins :
+		[
+			terser()
+		],
 
-	output :
-	{
+		external :
+		[
+			'stream'
+		],
+
+		output
+	};
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+export default
+[
+	bundle({
+		file : 'log2stream.js',
+		format : 'esm'
+	}),
+
+	bundle({
 		file : 'log2stream.cjs',
 		format : 'cjs',
 		exports : 'named'
-	},
-
-	external :
-	[
-		'stream'
-	]
-};
+	})
+];

@@ -2,6 +2,12 @@
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.1.1] (2021-05-16)
+
+### Changed
+
+- This module now exports minified single file entry points, making this package much more lightweight.
+
 ## [3.1.0] (2021-05-11)
 
 ### Added
@@ -10,7 +16,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
-- Support for Node.js version 10.x.x has been dropped.
+- Support for Node.js version `10.x.x` has been dropped.
 
 ## [3.0.1] (2018-12-02)
 

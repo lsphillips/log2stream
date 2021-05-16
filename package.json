@@ -1,7 +1,7 @@
 {
 	"name" : "log2stream",
 
-	"version" : "3.1.0",
+	"version" : "3.1.1",
 
     "type" : "module",
 
@@ -38,11 +38,11 @@
 		"chai" : "4.3.4",
 		"sinon" : "10.0.0",
 		"eslint" : "7.26.0",
-		"eslint-plugin-import" : "2.22.1",
+		"eslint-plugin-import" : "2.23.2",
 		"eslint-plugin-promise" : "5.1.0",
         "eslint-plugin-node" : "11.1.0",
-		"eslint-config-protect-me-from-my-stupidity" : "7.2.0",
-        "rollup" : "2.47.0",
+		"eslint-config-protect-me-from-my-stupidity" : "7.2.2",
+        "rollup" : "2.48.0",
         "rollup-plugin-terser" : "7.0.2"
     },
 
@@ -50,9 +50,20 @@
 
     "exports" :
     {
-        "import" : "./src/log2stream.js",
-        "require" : "./log2stream.cjs"
+        "import" : "./log2stream.js",
+        "require" : "./log2stream.cjs",
+		"default" : "./log2stream.cjs"
     },
+
+	"files" :
+	[
+		"/README.md",
+        "/CHANGELOG.md",
+        "/LICENSE.txt",
+		"/log2stream.js",
+        "/log2stream.cjs",
+        "/log2stream.d.ts"
+	],
 
 	"repository" :
 	{
