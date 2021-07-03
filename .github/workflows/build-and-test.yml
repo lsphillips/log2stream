@@ -20,6 +20,8 @@ jobs:
           - '14'
           - '16'
 
+    name: Build and Test on Node v${{ matrix.node }}
+
     steps:
 
       - name: Checkout
