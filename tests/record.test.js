@@ -1,4 +1,4 @@
-import sinon             from 'sinon';
+import { useFakeTimers } from 'sinon';
 import { expect }        from 'chai';
 import { Level, Record } from '../src/log2stream.js';
 
@@ -10,7 +10,7 @@ describe('class Record', function ()
 
 	beforeEach(function ()
 	{
-		clock = sinon.useFakeTimers();
+		clock = useFakeTimers();
 	});
 
 	afterEach(function ()
