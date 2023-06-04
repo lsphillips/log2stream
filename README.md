@@ -180,7 +180,7 @@ npm install log2stream
 
 ### Building
 
-You can build a CommonJS and ESM version of this module that is also minified:
+You can build CommonJS and ESM versions of this module that is also minified:
 
 ``` sh
 npm run build
@@ -198,4 +198,4 @@ This includes a code quality check using ESLint. Please refer to the `.eslintrc`
 
 ## License
 
-This project is released under the [MIT license](LICENSE.txt).
+This module is released under the [MIT license](LICENSE.txt).
