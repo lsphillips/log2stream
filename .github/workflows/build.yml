@@ -1,14 +1,18 @@
-name: Build and Test
+name: Build
 
 on:
   push:
+    branches:
+      - master
     paths-ignore:
       - '**.md'
+      - 'LICENSE.txt'
   pull_request:
     branches:
       - master
     paths-ignore:
       - '**.md'
+      - 'LICENSE.txt'
 
 jobs:
 
@@ -17,19 +21,19 @@ jobs:
     strategy:
       matrix:
         node:
-          - '12'
           - '14'
           - '16'
+          - '18'
 
-    name: Build and Test on Node v${{ matrix.node }}
+    name: Build & Test on Node v${{ matrix.node }}
 
     steps:
 
       - name: Checkout
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v3
 
       - name: Install NodeJS
-        uses: actions/setup-node@v2.2.0
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
 
