@@ -168,7 +168,7 @@ factory.stream.pipe(filter);
 
 ## Getting started
 
-This project is available through the Node Package Manager (NPM), so you can install it like so:
+This module is available through the Node Package Manager (NPM):
 
 ``` sh
 npm install log2stream
@@ -180,7 +180,7 @@ npm install log2stream
 
 ### Building
 
-You can build a CommonJS version of this module that is also minified:
+You can build a CommonJS and ESM version of this module that is also minified:
 
 ``` sh
 npm run build
@@ -194,8 +194,8 @@ This module also has a robust test suite:
 npm test
 ```
 
-This also runs code quality checks using ESLint. Please refer to the `.eslintrc` files to familiar yourself with the rules.
+This includes a code quality check using ESLint. Please refer to the `.eslintrc` files to familiar yourself with the rules.
 
 ## License
 
-This project is released under the MIT License.
+This project is released under the [MIT license](LICENSE.txt).
