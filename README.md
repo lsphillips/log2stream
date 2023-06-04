@@ -198,4 +198,4 @@ This includes a code quality check using ESLint. Please refer to the `.eslintrc`
 
 ## License
 
-This module is released under the [MIT license](LICENSE.txt).
+This module is released under the [MIT License](LICENSE.txt).
