@@ -180,7 +180,7 @@ npm install log2stream
 
 ### Building
 
-You can build CommonJS and ESM versions of this module that is also minified:
+You can build CommonJS and ESM versions of this module that are both minified:
 
 ``` sh
 npm run build
