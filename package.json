@@ -38,7 +38,7 @@
 		"chai" : "4.3.10",
 		"sinon" : "16.1.0",
 		"eslint" : "8.51.0",
-		"eslint-plugin-import" : "2.28.1",
+		"eslint-plugin-import" : "2.29.0",
 		"eslint-plugin-promise" : "6.1.1",
         "eslint-plugin-node" : "11.1.0",
 		"eslint-config-protect-me-from-my-stupidity" : "9.5.1",
