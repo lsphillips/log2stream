@@ -21,9 +21,8 @@ jobs:
     strategy:
       matrix:
         node:
-          - '14'
-          - '16'
           - '18'
+          - '20'
 
     name: Build & Test on Node v${{ matrix.node }}
 
