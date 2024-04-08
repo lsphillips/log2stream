@@ -29,7 +29,7 @@
 
 	"dependencies" :
 	{
-		"@types/node" : "20.11.30"
+		"@types/node" : "20.12.5"
 	},
 
 	"devDependencies" :
