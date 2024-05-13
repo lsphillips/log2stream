@@ -35,7 +35,7 @@
 	"devDependencies" :
 	{
 		"mocha" : "10.4.0",
-		"chai" : "5.1.0",
+		"chai" : "5.1.1",
 		"sinon" : "17.0.1",
 		"eslint" : "8.57.0",
 		"eslint-plugin-import" : "2.29.1",
