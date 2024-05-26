@@ -1,7 +1,7 @@
 {
 	"name" : "log2stream",
 
-	"version" : "3.1.1",
+	"version" : "3.1.2",
 
     "type" : "module",
 
@@ -20,11 +20,11 @@
 		"log4j"
 	],
 
-	"homepage" : "https://github.com/lsphillips/Log2stream",
+	"homepage" : "https://github.com/lsphillips/log2stream",
 
 	"bugs" :
 	{
-		"url" : "https://github.com/lsphillips/Log2stream/issues"
+		"url" : "https://github.com/lsphillips/log2stream/issues"
 	},
 
 	"dependencies" :
@@ -69,7 +69,7 @@
 	"repository" :
 	{
 		"type" : "git",
-		"url" : "https://github.com/lsphillips/Log2stream.git"
+		"url" : "https://github.com/lsphillips/log2stream.git"
 	},
 
 	"scripts" :
