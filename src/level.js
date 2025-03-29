@@ -48,7 +48,7 @@ class Level
 
 	static toLevel (string)
 	{
-		let level = Level[string];
+		const level = Level[string];
 
 		if (level instanceof Level)
 		{

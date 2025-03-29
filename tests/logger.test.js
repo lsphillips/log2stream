@@ -50,7 +50,7 @@ describe('class Logger', function ()
 
 	['Debug', 'Info', 'Warn', 'Error', 'Fatal'].forEach(function (level)
 	{
-		let method = level.toLowerCase();
+		const method = level.toLowerCase();
 
 		describe(`#${method}(message, metadata)`, function ()
 		{
