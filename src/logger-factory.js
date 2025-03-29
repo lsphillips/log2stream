@@ -1,5 +1,7 @@
-import { PassThrough } from 'stream';
-import Logger          from './logger.js';
+import {
+	PassThrough
+} from 'node:stream';
+import Logger from './logger.js';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

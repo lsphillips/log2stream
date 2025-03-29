@@ -1,87 +1,84 @@
-import { useFakeTimers } from 'sinon';
-import { expect }        from 'chai';
-import { Level, Record } from '../src/log2stream.js';
+import {
+	describe,
+	it
+} from 'node:test';
+import assert from 'node:assert';
+import {
+	Level,
+	Record
+} from '../src/log2stream.js';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 describe('class Record', function ()
 {
-	let clock = null;
-
-	beforeEach(function ()
-	{
-		clock = useFakeTimers();
-	});
-
-	afterEach(function ()
-	{
-		clock.restore();
-	});
-
 	describe('constructor(level, category, message, metadata = null)', function ()
 	{
 		it('shall set Record#level to `level`', function ()
 		{
 			// Act.
-			let record = new Record(Level.ERROR, 'Test', 'This is an error message.');
+			const record = new Record(Level.ERROR, 'Test', 'This is an error message.');
 
 			// Assert.
-			expect(record.level).to.equal(Level.ERROR);
+			assert.strictEqual(record.level, Level.ERROR);
 		});
 
 		it('shall set Record#category to `category`', function ()
 		{
 			// Act.
-			let record = new Record(Level.ERROR, 'Test', 'This is an error message.');
+			const record = new Record(Level.ERROR, 'Test', 'This is an error message.');
 
 			// Assert.
-			expect(record.category).to.equal('Test');
+			assert.strictEqual(record.category, 'Test');
 		});
 
 		it('shall set Record#message to `message`', function ()
 		{
 			// Act.
-			let record = new Record(Level.ERROR, 'Test', 'This is an error message.');
+			const record = new Record(Level.ERROR, 'Test', 'This is an error message.');
 
 			// Assert.
-			expect(record.message).to.equal('This is an error message.');
+			assert.strictEqual(record.message, 'This is an error message.');
 		});
 
-		it('shall set Record#date to the date of which the log record was created', function ()
+		it('shall set Record#date to the date of which the log record was created', function ({
+			mock
+		})
 		{
 			// Setup.
-			clock.tick(699089400000);
+			mock.timers.enable({
+				apis : ['Date'], now : 699089400000
+			});
 
 			// Act.
-			let record = new Record(Level.ERROR, 'Test', 'This is an error message.');
+			const record = new Record(Level.ERROR, 'Test', 'This is an error message.');
 
 			// Assert.
-			expect(record.date).to.be.instanceof(Date);
+			assert.ok(record.date instanceof Date);
 
 			// Assert.
-			expect(
-				record.date.toISOString()
-			).to.equal('1992-02-26T07:30:00.000Z');
+			assert.strictEqual(record.date.toISOString(), '1992-02-26T07:30:00.000Z');
 		});
 
 		it('shall set Record#metadata to `metadata`', function ()
 		{
-			let metadata = {};
+			// Setup.
+			const metadata = {};
 
 			// Act.
-			let record = new Record(Level.ERROR, 'Test', 'This is an error message.', metadata);
+			const record = new Record(Level.ERROR, 'Test', 'This is an error message.', metadata);
 
 			// Assert.
-			expect(record.metadata).to.equal(metadata);
+			assert.strictEqual(record.metadata, metadata);
 		});
 
 		it('shall set Record#metadata to `null` when `metadata` is not provided', function ()
 		{
 			// Act.
-			let record = new Record(Level.ERROR, 'Test', 'This is an error message.');
+			const record = new Record(Level.ERROR, 'Test', 'This is an error message.');
 
 			// Assert.
-			expect(record.metadata).to.be.null;
+			assert.strictEqual(record.metadata, null);
 		});
 	});
 });

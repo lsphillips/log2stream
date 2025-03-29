@@ -1,6 +1,8 @@
-import { PassThrough } from 'stream';
-import Level           from './level.js';
-import Record          from './record.js';
+import {
+	PassThrough
+} from 'node:stream';
+import Level from './level.js';
+import Record from './record.js';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

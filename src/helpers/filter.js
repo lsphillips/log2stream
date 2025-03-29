@@ -1,4 +1,6 @@
-import { Transform } from 'stream';
+import {
+	Transform
+} from 'node:stream';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
