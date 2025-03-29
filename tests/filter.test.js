@@ -1,6 +1,19 @@
-import * as stream               from 'stream';
-import { expect }                from 'chai';
-import { Record, Level, filter } from '../src/log2stream.js';
+import {
+	Transform
+} from 'node:stream';
+import {
+	describe,
+	it
+} from 'node:test';
+import assert from 'node:assert';
+import {
+	streamToArray
+} from './support/stream-helpers.js';
+import {
+	Record,
+	Level,
+	filter
+} from '../src/log2stream.js';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -8,60 +21,56 @@ describe('filter(test)', function ()
 {
 	it('shall return a transformation stream', function ()
 	{
-		// Act & Assert.
-		expect(
-			filter(() => true)
-		).to.be.instanceof(stream.Transform);
+		// Act.
+		const stream = filter(() => true);
+
+		// Assert.
+		assert.ok(stream instanceof Transform);
 	});
 
-	it('shall return a stream that will filter log records that do not pass the `test` function', function (done)
+	it('shall return a stream that will filter log records that do not pass the `test` function', async function ()
 	{
-		let anExampleRecord = new Record(Level.Error, 'Category', 'This is an error message.');
-
-		// Setup.
-		let transformer = filter(record =>
-		{
-			return record.level === Level.Error;
-		});
-
-		// Setup.
-		transformer.on('data', record =>
-		{
-			// Assert.
-			expect(record).to.equal(anExampleRecord);
-
-			done();
-		});
+		const record = new Record(Level.Error, 'Category', 'This is an error message.');
 
 		// Act.
-		transformer.write(
+		const stream = filter(r => r.level === Level.Error);
+
+		// Setup.
+		stream.write(
 			new Record(Level.Warn, 'Another Category', 'This is a warning message.')
 		);
+		stream.write(record);
 
-		// Act.
-		transformer.write(anExampleRecord);
+		// Setup.
+		const records = await streamToArray(
+			stream.end()
+		);
+
+		// Assert.
+		assert.strictEqual(records.length, 1);
+
+		// Assert.
+		assert.strictEqual(records[0], record);
 	});
 
-	it('shall return a stream that will emit an error if the `test` function fails', function (done)
+	it('shall return a stream that will emit an error if the `test` function fails', async function ()
 	{
 		// Setup.
-		let transformer = filter(() =>
+		const stream = filter(() =>
 		{
 			throw new Error('The record could not be tested.');
 		});
 
-		// Setup.
-		transformer.on('error', error =>
-		{
-			// Assert.
-			expect(error).to.be.instanceOf(Error);
-
-			done();
-		});
-
 		// Act.
-		transformer.write(
+		stream.write(
 			new Record(Level.Warn, 'Another Category', 'This is a warning message.')
 		);
+
+		// Assert.
+		await assert.rejects(async () =>
+		{
+			await streamToArray(stream);
+
+		}, Error);
 	});
 });

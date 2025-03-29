@@ -1,5 +1,11 @@
-import { expect } from 'chai';
-import { Level }  from '../src/log2stream.js';
+import {
+	describe,
+	it
+} from 'node:test';
+import assert from 'node:assert';
+import {
+	Level
+} from '../src/log2stream.js';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -10,19 +16,19 @@ describe('class Level', function ()
 		it('shall set Level#name to `name`', function ()
 		{
 			// Act.
-			let level = new Level('Trace', 10);
+			const level = new Level('Trace', 10);
 
 			// Assert.
-			expect(level.name).to.equal('Trace');
+			assert.strictEqual(level.name, 'Trace');
 		});
 
 		it('shall set Level#severity to `severity`', function ()
 		{
 			// Act.
-			let level = new Level('Trace', 10);
+			const level = new Level('Trace', 10);
 
 			// Assert.
-			expect(level.severity).to.equal(10);
+			assert.strictEqual(level.severity, 10);
 		});
 	});
 
@@ -31,12 +37,10 @@ describe('class Level', function ()
 		it('shall return the name of the level', function ()
 		{
 			// Act.
-			let level = new Level('Trace', 10);
+			const level = new Level('Trace', 10);
 
 			// Assert.
-			expect(
-				level.toString()
-			).to.equal('Trace');
+			assert.strictEqual(level.toString(), 'Trace');
 		});
 	});
 
@@ -45,12 +49,10 @@ describe('class Level', function ()
 		it('shall return the name of the level', function ()
 		{
 			// Act.
-			let level = new Level('Trace', 10);
+			const level = new Level('Trace', 10);
 
 			// Assert.
-			expect(
-				level.toString()
-			).to.equal('Trace');
+			assert.strictEqual(level.toString(), 'Trace');
 		});
 	});
 
@@ -59,17 +61,13 @@ describe('class Level', function ()
 		it('shall return the predefined level with `string` as its name', function ()
 		{
 			// Act & Assert.
-			expect(
-				Level.toLevel('Error')
-			).to.equal(Level.Error);
+			assert.strictEqual(Level.toLevel('Error'), Level.Error);
 		});
 
 		it('shall return `null` if no predefined level exists with `string` as its name', function ()
 		{
 			// Act & Assert.
-			expect(
-				Level.toLevel('Trace')
-			).to.equal(null);
+			assert.strictEqual(Level.toLevel('Trace'), null);
 		});
 	});
 
@@ -78,27 +76,23 @@ describe('class Level', function ()
 		it('shall return `true` when the level severity is equal to that of `level`', function ()
 		{
 			// Setup.
-			let level = new Level('Trace', 10);
+			const level = new Level('Trace', 10);
 
 			// Act & Assert.
-			expect(
-				level.isEqualTo(
-					new Level('Debug', 10)
-				)
-			).to.be.true;
+			assert.strictEqual(level.isEqualTo(
+				new Level('Debug', 10)
+			), true);
 		});
 
 		it('shall return `false` when the level severity is not equal to that of `level`', function ()
 		{
 			// Setup.
-			let level = new Level('Trace', 10);
+			const level = new Level('Trace', 10);
 
 			// Act & Assert.
-			expect(
-				level.isEqualTo(
-					new Level('Trace', 15)
-				)
-			).to.be.false;
+			assert.strictEqual(level.isEqualTo(
+				new Level('Trace', 15)
+			), false);
 		});
 	});
 
@@ -107,40 +101,34 @@ describe('class Level', function ()
 		it('shall return `true` when the level severity is greater than that of `level`', function ()
 		{
 			// Setup.
-			let level = new Level('Debug', 10);
+			const level = new Level('Debug', 10);
 
 			// Act & Assert.
-			expect(
-				level.isGreaterThan(
-					new Level('Trace', 5)
-				)
-			).to.be.true;
+			assert.strictEqual(level.isGreaterThan(
+				new Level('Trace', 5)
+			), true);
 		});
 
 		it('shall return `false` when the level severity is equal to that of `level`', function ()
 		{
 			// Setup.
-			let level = new Level('Debug', 10);
+			const level = new Level('Debug', 10);
 
 			// Act & Assert.
-			expect(
-				level.isGreaterThan(
-					new Level('Trace', 10)
-				)
-			).to.be.false;
+			assert.strictEqual(level.isGreaterThan(
+				new Level('Trace', 10)
+			), false);
 		});
 
 		it('shall return `false` when the level severity is not greater than that of `level`', function ()
 		{
 			// Setup.
-			let level = new Level('Trace', 5);
+			const level = new Level('Trace', 5);
 
 			// Act & Assert.
-			expect(
-				level.isGreaterThan(
-					new Level('Debug', 10)
-				)
-			).to.be.false;
+			assert.strictEqual(level.isGreaterThan(
+				new Level('Debug', 10)
+			), false);
 		});
 	});
 
@@ -149,40 +137,34 @@ describe('class Level', function ()
 		it('shall return `true` when the level severity is greater than that of `level`', function ()
 		{
 			// Setup.
-			let level = new Level('Debug', 10);
+			const level = new Level('Debug', 10);
 
 			// Act & Assert.
-			expect(
-				level.isGreaterThanOrEqualTo(
-					new Level('Trace', 5)
-				)
-			).to.be.true;
+			assert.strictEqual(level.isGreaterThanOrEqualTo(
+				new Level('Trace', 5)
+			), true);
 		});
 
 		it('shall return `true` when the level severity is equal to that of `level`', function ()
 		{
 			// Setup.
-			let level = new Level('Debug', 10);
+			const level = new Level('Debug', 10);
 
 			// Act & Assert.
-			expect(
-				level.isGreaterThanOrEqualTo(
-					new Level('Trace', 10)
-				)
-			).to.be.true;
+			assert.strictEqual(level.isGreaterThanOrEqualTo(
+				new Level('Trace', 10)
+			), true);
 		});
 
 		it('shall return `false` when the level severity is less than that of `level`', function ()
 		{
 			// Setup.
-			let level = new Level('Trace', 5);
+			const level = new Level('Trace', 5);
 
 			// Act & Assert.
-			expect(
-				level.isGreaterThanOrEqualTo(
-					new Level('Debug', 10)
-				)
-			).to.be.false;
+			assert.strictEqual(level.isGreaterThanOrEqualTo(
+				new Level('Debug', 10)
+			), false);
 		});
 	});
 
@@ -191,40 +173,34 @@ describe('class Level', function ()
 		it('shall return `true` when the level severity is less than that of `level`', function ()
 		{
 			// Setup.
-			let level = new Level('Trace', 5);
+			const level = new Level('Trace', 5);
 
 			// Act & Assert.
-			expect(
-				level.isLessThan(
-					new Level('Debug', 10)
-				)
-			).to.be.true;
+			assert.strictEqual(level.isLessThan(
+				new Level('Debug', 10)
+			), true);
 		});
 
 		it('shall return `false` when the level severity is equal to that of `level`', function ()
 		{
 			// Setup.
-			let level = new Level('Debug', 10);
+			const level = new Level('Debug', 10);
 
 			// Act & Assert.
-			expect(
-				level.isLessThan(
-					new Level('Trace', 10)
-				)
-			).to.be.false;
+			assert.strictEqual(level.isLessThan(
+				new Level('Trace', 10)
+			), false);
 		});
 
 		it('shall return `false` when the level severity is not less than that of `level`', function ()
 		{
 			// Setup.
-			let level = new Level('Debug', 10);
+			const level = new Level('Debug', 10);
 
 			// Act & Assert.
-			expect(
-				level.isLessThan(
-					new Level('Trace', 5)
-				)
-			).to.be.false;
+			assert.strictEqual(level.isLessThan(
+				new Level('Trace', 5)
+			), false);
 		});
 	});
 
@@ -233,40 +209,34 @@ describe('class Level', function ()
 		it('shall return `true` when the level severity is less than that of `level`', function ()
 		{
 			// Setup.
-			let level = new Level('Trace', 5);
+			const level = new Level('Trace', 5);
 
 			// Act & Assert.
-			expect(
-				level.isLessThanOrEqualTo(
-					new Level('Debug', 10)
-				)
-			).to.be.true;
+			assert.strictEqual(level.isLessThanOrEqualTo(
+				new Level('Debug', 10)
+			), true);
 		});
 
 		it('shall return `true` when the level severity is equal to that of `level`', function ()
 		{
 			// Setup.
-			let level = new Level('Debug', 10);
+			const level = new Level('Debug', 10);
 
 			// Act & Assert.
-			expect(
-				level.isLessThanOrEqualTo(
-					new Level('Trace', 10)
-				)
-			).to.be.true;
+			assert.strictEqual(level.isLessThanOrEqualTo(
+				new Level('Trace', 10)
+			), true);
 		});
 
 		it('shall return `false` when the level severity is greater than that of `level`', function ()
 		{
 			// Setup.
-			let level = new Level('Debug', 10);
+			const level = new Level('Debug', 10);
 
 			// Act & Assert.
-			expect(
-				level.isLessThanOrEqualTo(
-					new Level('Trace', 5)
-				)
-			).to.be.false;
+			assert.strictEqual(level.isLessThanOrEqualTo(
+				new Level('Trace', 5)
+			), false);
 		});
 	});
 
@@ -275,16 +245,16 @@ describe('class Level', function ()
 		it('shall be a predefined level with the name `Debug`', function ()
 		{
 			// Assert.
-			expect(Level.Debug).to.be.instanceof(Level);
+			assert.ok(Level.Debug instanceof Level);
 
 			// Assert.
-			expect(Level.Debug.name).to.equal('Debug');
+			assert.strictEqual(Level.Debug.name, 'Debug');
 		});
 
 		it('shall be less severe than Level.Info', function ()
 		{
 			// Assert.
-			expect(Level.Debug.severity).to.be.below(Level.Info.severity);
+			assert.ok(Level.Debug.severity < Level.Info.severity);
 		});
 	});
 
@@ -293,19 +263,19 @@ describe('class Level', function ()
 		it('shall be a predefined level with the name `Info`', function ()
 		{
 			// Assert.
-			expect(Level.Info).to.be.instanceof(Level);
+			assert.ok(Level.Info instanceof Level);
 
 			// Assert.
-			expect(Level.Info.name).to.equal('Info');
+			assert.strictEqual(Level.Info.name, 'Info');
 		});
 
 		it('that shall be more severe than Level.Debug but less severe than Level.Warn', function ()
 		{
 			// Assert.
-			expect(Level.Info.severity).to.be.above(Level.Debug.severity);
+			assert.ok(Level.Info.severity > Level.Debug.severity);
 
 			// Assert.
-			expect(Level.Info.severity).to.be.below(Level.Warn.severity);
+			assert.ok(Level.Info.severity < Level.Warn.severity);
 		});
 	});
 
@@ -314,19 +284,19 @@ describe('class Level', function ()
 		it('shall be a predefined level with the name `Warn`', function ()
 		{
 			// Assert.
-			expect(Level.Warn).to.be.instanceof(Level);
+			assert.ok(Level.Warn instanceof Level);
 
 			// Assert.
-			expect(Level.Warn.name).to.equal('Warn');
+			assert.strictEqual(Level.Warn.name, 'Warn');
 		});
 
 		it('that shall be more severe than Level.Info but less severe than Level.Error', function ()
 		{
 			// Assert.
-			expect(Level.Warn.severity).to.be.above(Level.Info.severity);
+			assert.ok(Level.Warn.severity > Level.Info.severity);
 
 			// Assert.
-			expect(Level.Warn.severity).to.be.below(Level.Error.severity);
+			assert.ok(Level.Warn.severity < Level.Error.severity);
 		});
 	});
 
@@ -335,19 +305,19 @@ describe('class Level', function ()
 		it('shall be a predefined level with the name `Error`', function ()
 		{
 			// Assert.
-			expect(Level.Error).to.be.instanceof(Level);
+			assert.ok(Level.Error instanceof Level);
 
 			// Assert.
-			expect(Level.Error.name).to.equal('Error');
+			assert.strictEqual(Level.Error.name, 'Error');
 		});
 
 		it('that shall be more severe than Level.Warn but less severe than Level.Fatal', function ()
 		{
 			// Assert.
-			expect(Level.Error.severity).to.be.above(Level.Warn.severity);
+			assert.ok(Level.Error.severity > Level.Warn.severity);
 
 			// Assert.
-			expect(Level.Error.severity).to.be.below(Level.Fatal.severity);
+			assert.ok(Level.Error.severity < Level.Fatal.severity);
 		});
 	});
 
@@ -356,16 +326,16 @@ describe('class Level', function ()
 		it('shall be a predefined level with the name `Fatal`', function ()
 		{
 			// Assert.
-			expect(Level.Fatal).to.be.instanceof(Level);
+			assert.ok(Level.Fatal instanceof Level);
 
 			// Assert.
-			expect(Level.Fatal.name).to.equal('Fatal');
+			assert.strictEqual(Level.Fatal.name, 'Fatal');
 		});
 
 		it('that shall be more severe than Level.Error', function ()
 		{
 			// Assert.
-			expect(Level.Fatal.severity).to.be.above(Level.Error.severity);
+			assert.ok(Level.Fatal.severity > Level.Error.severity);
 		});
 	});
 });
