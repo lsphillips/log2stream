@@ -29,7 +29,7 @@
 
 	"dependencies" :
 	{
-		"@types/node" : "24.5.2"
+		"@types/node" : "24.9.1"
 	},
 
 	"devDependencies" :
